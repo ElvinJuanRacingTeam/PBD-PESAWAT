@@ -78,6 +78,7 @@ th,td{
     font-size:14px;
 }
 tr:nth-child(even){background:#f9fafb;}
+
 .badge{
     padding:4px 10px;
     border-radius:20px;
@@ -86,8 +87,9 @@ tr:nth-child(even){background:#f9fafb;}
 }
 .male{background:#dbeafe;color:#1d4ed8;}
 .female{background:#fce7f3;color:#be185d;}
+
 .action a{
-    margin-right:8px;
+    margin-right:10px;
     text-decoration:none;
     font-weight:600;
     color:#4f46e5;
@@ -118,13 +120,14 @@ tr:nth-child(even){background:#f9fafb;}
         <a href="/logout" style="color:#ffb4b4;text-decoration:none;">Sign Out System</a>
     </div>
 
+
     <!-- MAIN -->
     <div class="main">
 
         <h2>Passenger Database</h2>
         <br>
 
-        <a href="/penumpang/create" style="
+        <a href="{{ route('penumpang.create') }}" style="
             background:#4f46e5;
             color:white;
             padding:8px 14px;
@@ -141,9 +144,10 @@ tr:nth-child(even){background:#f9fafb;}
                 <tr>
                     <th>NIK</th>
                     <th>Nama</th>
-                    <th>Gender</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Tanggal Lahir</th>
+                    <th>No Telepon</th>
                     <th>Email</th>
-                    <th>Telepon</th>
                     <th>Alamat</th>
                     <th>Aksi</th>
                 </tr>
@@ -153,22 +157,28 @@ tr:nth-child(even){background:#f9fafb;}
                     <td>{{ $p->nik }}</td>
                     <td>{{ $p->nama }}</td>
                     <td>
-                        @if($p->gender == 'L')
-                            <span class="badge male">MALE</span>
+                        @if($p->jenis_kelamin == 'L')
+                            <span class="badge male">LAKI-LAKI</span>
                         @else
-                            <span class="badge female">FEMALE</span>
+                            <span class="badge female">PEREMPUAN</span>
                         @endif
                     </td>
+                    <td>{{ $p->tgl_lahir }}</td>
+                    <td>{{ $p->no_telp }}</td>
                     <td>{{ $p->email }}</td>
-                    <td>{{ $p->telepon }}</td>
                     <td>{{ $p->alamat }}</td>
                     <td class="action">
-                        <a href="/penumpang/{{ $p->id }}/edit">Edit</a>
-                        <form action="/penumpang/{{ $p->id }}" method="POST" style="display:inline;">
+
+                        <a href="{{ route('penumpang.edit', $p->id_penumpang) }}">Edit</a>
+
+                        <form action="{{ route('penumpang.destroy', $p->id_penumpang) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" style="border:none;background:none;color:red;font-weight:600;cursor:pointer;">Hapus</button>
+                            <button type="submit" style="border:none;background:none;color:red;font-weight:600;cursor:pointer;">
+                                Hapus
+                            </button>
                         </form>
+
                     </td>
                 </tr>
                 @endforeach

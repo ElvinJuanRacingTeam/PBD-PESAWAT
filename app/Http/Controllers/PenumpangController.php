@@ -21,26 +21,17 @@ class PenumpangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nik'            => 'required|unique:penumpang,nik',
-            'nama'           => 'required',
-            'jenis_kelamin'  => 'required',
-            'tgl_lahir'      => 'required|date',
-            'no_telp'        => 'required',
-            'email'          => 'required|email',
-            'alamat'         => 'required'
+            'nik' => 'required|unique:penumpang,nik',
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
+            'tgl_lahir' => 'required|date',
+            'no_telp' => 'required',
+            'email' => 'required|email',
+            'alamat' => 'required'
         ]);
 
-        Penumpang::create([
-            'nik'           => $request->nik,
-            'nama'          => $request->nama,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'tgl_lahir'     => $request->tgl_lahir,
-            'no_telp'       => $request->no_telp,
-            'email'         => $request->email,
-            'alamat'        => $request->alamat
-        ]);
-
-        return redirect('/penumpang');
+        Penumpang::create($request->all());
+        return redirect()->route('penumpang.index');
     }
 
     public function edit($id)
@@ -54,29 +45,21 @@ class PenumpangController extends Controller
         $penumpang = Penumpang::where('id_penumpang',$id)->firstOrFail();
 
         $request->validate([
-            'nama'           => 'required',
-            'jenis_kelamin'  => 'required',
-            'tgl_lahir'      => 'required|date',
-            'no_telp'        => 'required',
-            'email'          => 'required|email',
-            'alamat'         => 'required'
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
+            'tgl_lahir' => 'required|date',
+            'no_telp' => 'required',
+            'email' => 'required|email',
+            'alamat' => 'required'
         ]);
 
-        $penumpang->update([
-            'nama'          => $request->nama,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'tgl_lahir'     => $request->tgl_lahir,
-            'no_telp'       => $request->no_telp,
-            'email'         => $request->email,
-            'alamat'        => $request->alamat
-        ]);
-
-        return redirect('/penumpang');
+        $penumpang->update($request->all());
+        return redirect()->route('penumpang.index');
     }
 
     public function destroy($id)
     {
         Penumpang::where('id_penumpang',$id)->delete();
-        return redirect('/penumpang');
+        return redirect()->route('penumpang.index');
     }
 }
