@@ -12,6 +12,7 @@ class Penumpang extends Model
 
     protected $table = 'penumpang';
     protected $primaryKey = 'id_penumpang';
+    public $timestamps = false;
 
     protected $fillable = [
         'nik',
@@ -20,11 +21,11 @@ class Penumpang extends Model
         'tgl_lahir',
         'no_telp',
         'email',
-        'alamat',
+        'alamat'
     ];
 
     public function pemesanan()
     {
-        return $this->hasMany(Pemesanan::class, 'id_penumpang');
+        return $this->hasMany(Pemesanan::class, 'id_penumpang', 'id_penumpang');
     }
 }
