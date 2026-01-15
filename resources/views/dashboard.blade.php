@@ -111,7 +111,7 @@ tr:nth-child(even){background:#f9fafb;}
             @foreach($recentBookings as $b)
             <tr>
                 <td>#BK-{{ $b->id_pemesanan }}</td>
-                <td>{{ $b->nama }}</td>
+                <td>{{ $b->penumpang->nama ?? 'N/A' }}</td>
                 <td>{{ $b->nomor_kursi }}</td>
                 <td class="price">Rp {{ number_format($b->total_harga,0,',','.') }}</td>
             </tr>
@@ -133,7 +133,7 @@ tr:nth-child(even){background:#f9fafb;}
             <tr>
                 <td>{{ $f->kota_asal }} → {{ $f->kota_tujuan }}</td>
                 <td>{{ $f->kelas }}</td>
-                <td>{{ $f->tgl_penerbangan }}</td>
+                <td>{{ \Carbon\Carbon::parse($f->tgl_keberangkatan)->format('d M Y') }}</td>
             </tr>
             @endforeach
 

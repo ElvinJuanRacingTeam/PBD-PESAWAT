@@ -13,7 +13,12 @@ class PemesananController extends Controller
      */
     public function index()
     {
-        //
+        $pemesanan = Pemesanan::with(['penumpang', 'penerbangan'])
+            ->orderBy('tgl_pemesanan', 'desc')
+            ->get();
+        $penumpang = \App\Models\Penumpang::orderBy('nama')->get();
+        $penerbangan = \App\Models\Penerbangan::orderBy('tgl_keberangkatan', 'desc')->get();
+        return view('pemesanan.index', compact('pemesanan', 'penumpang', 'penerbangan'));
     }
 
     /**
@@ -30,7 +35,7 @@ class PemesananController extends Controller
     public function store(StorePemesananRequest $request)
     {
         Pemesanan::create($request->validated());
-        // Add redirect or response
+        return redirect('/pemesanan')->with('success', 'Booking created successfully!');
     }
 
     /**
@@ -55,7 +60,7 @@ class PemesananController extends Controller
     public function update(UpdatePemesananRequest $request, Pemesanan $pemesanan)
     {
         $pemesanan->update($request->validated());
-        // Add redirect or response
+        return redirect('/pemesanan')->with('success', 'Booking updated successfully!');
     }
 
     /**
@@ -64,6 +69,6 @@ class PemesananController extends Controller
     public function destroy(Pemesanan $pemesanan)
     {
         $pemesanan->delete();
-        // Add redirect or response
+        return redirect('/pemesanan')->with('success', 'Booking deleted successfully!');
     }
 }

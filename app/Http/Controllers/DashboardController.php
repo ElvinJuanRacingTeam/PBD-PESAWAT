@@ -23,7 +23,8 @@ class DashboardController extends Controller
         $users = Penumpang::count();
 
         // Recent bookings
-        $recentBookings = Pemesanan::orderBy('created_at','desc')
+        $recentBookings = Pemesanan::with('penumpang')
+            ->orderBy('created_at','desc')
             ->limit(4)
             ->get();
 

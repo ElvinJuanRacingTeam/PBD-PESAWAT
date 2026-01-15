@@ -13,7 +13,8 @@ class PenerbanganController extends Controller
      */
     public function index()
     {
-        //
+        $penerbangan = Penerbangan::orderBy('tgl_keberangkatan', 'desc')->get();
+        return view('penerbangan.index', compact('penerbangan'));
     }
 
     /**
@@ -30,7 +31,7 @@ class PenerbanganController extends Controller
     public function store(StorePenerbanganRequest $request)
     {
         Penerbangan::create($request->validated());
-        // Add redirect or response
+        return redirect('/penerbangan')->with('success', 'Flight added successfully!');
     }
 
     /**
@@ -55,7 +56,7 @@ class PenerbanganController extends Controller
     public function update(UpdatePenerbanganRequest $request, Penerbangan $penerbangan)
     {
         $penerbangan->update($request->validated());
-        // Add redirect or response
+        return redirect('/penerbangan')->with('success', 'Flight updated successfully!');
     }
 
     /**
@@ -64,6 +65,6 @@ class PenerbanganController extends Controller
     public function destroy(Penerbangan $penerbangan)
     {
         $penerbangan->delete();
-        // Add redirect or response
+        return redirect('/penerbangan')->with('success', 'Flight deleted successfully!');
     }
 }

@@ -28,7 +28,7 @@ class UpdatePenerbanganRequest extends FormRequest
             'waktu_keberangkatan' => 'required',
             'waktu_tiba' => 'required',
             'gerbang' => 'required|string',
-            'kelas' => 'required|in:Ekonomi,Bisnis,First Class',
+            'kelas' => 'required|in:Economy,Business,First Class',
             'maskapai' => 'required|string',
         ];
     }

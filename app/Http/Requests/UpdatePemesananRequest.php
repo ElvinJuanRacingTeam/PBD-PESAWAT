@@ -22,12 +22,12 @@ class UpdatePemesananRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'penumpang_id' => 'required|exists:penumpangs,id',
-            'penerbangan_id' => 'required|exists:penerbangans,id',
+            'id_penumpang' => 'required|exists:penumpang,id_penumpang',
+            'id_penerbangan' => 'required|exists:penerbangan,id_penerbangan',
             'nomor_kursi' => 'required|string',
             'total_harga' => 'required|integer',
             'tgl_pemesanan' => 'required|date',
-            'metode_pembayaran' => 'required|in:Transfer,Cash,E-Wallet',
+            'metode_pembayaran' => 'required|in:Credit Card,Transfer,Cash',
         ];
     }
 }
