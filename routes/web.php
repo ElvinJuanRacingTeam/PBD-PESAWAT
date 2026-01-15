@@ -1,20 +1,30 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+
 use App\Http\Controllers\PenumpangController;
 use App\Http\Controllers\PenerbanganController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\QueryController;
+use App\Http\Controllers\DashboardController;
 
-/* LOGIN PAGE */
 Route::get('/', function () {
     return view('login');
 });
 
-/* DASHBOARD PAGE */
-Route::get('/dashboard', [QueryController::class, 'dashboard']);
+Route::post('/login', function(){
+    Session::put('login', true);
+    return redirect('/dashboard');
+});
 
-/* CRUD RESOURCES */
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
+
+Route::get('/logout', function(){
+    Session::flush();
+    return redirect('/');
+});
+
 Route::resource('penumpang', PenumpangController::class);
 Route::resource('penerbangan', PenerbanganController::class);
 Route::resource('pemesanan', PemesananController::class);
