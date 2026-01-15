@@ -6,10 +6,15 @@ use App\Http\Controllers\PenerbanganController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\QueryController;
 
+/* LOGIN PAGE */
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
+/* DASHBOARD PAGE */
+Route::get('/dashboard', [QueryController::class, 'dashboard']);
+
+/* CRUD RESOURCES */
 Route::resource('penumpang', PenumpangController::class);
 Route::resource('penerbangan', PenerbanganController::class);
 Route::resource('pemesanan', PemesananController::class);
@@ -20,4 +25,3 @@ Route::get('/soal2', [QueryController::class, 'soal2']);
 Route::get('/soal3', [QueryController::class, 'soal3']);
 Route::get('/soal4', [QueryController::class, 'soal4']);
 Route::get('/soal5', [QueryController::class, 'soal5']);
-
