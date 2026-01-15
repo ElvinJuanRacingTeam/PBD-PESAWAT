@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Pemesanan;
 
 class Penerbangan extends Model
 {
     use HasFactory;
+
+    protected $table = 'penerbangan';
+    protected $primaryKey = 'id_penerbangan';
 
     protected $fillable = [
         'kota_asal',
@@ -22,6 +26,6 @@ class Penerbangan extends Model
 
     public function pemesanan()
     {
-        return $this->hasMany(Pemesanan::class);
+        return $this->hasMany(Pemesanan::class, 'id_penerbangan');
     }
 }
