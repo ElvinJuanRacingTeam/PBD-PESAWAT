@@ -2,68 +2,67 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePenumpangRequest;
-use App\Http\Requests\UpdatePenumpangRequest;
 use App\Models\Penumpang;
+use Illuminate\Http\Request;
 
 class PenumpangController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $penumpang = Penumpang::all();
+        return view('penumpang.index', compact('penumpang'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('penumpang.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StorePenumpangRequest $request)
+    public function store(Request $request)
     {
-        Penumpang::create($request->validated());
-        // Add redirect or response
+        $request->validate([
+            'nik' => 'required|unique:penumpangs',
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
+            'tgl_lahir' => 'required',
+            'no_telp' => 'required',
+            'email' => 'required|email',
+            'alamat' => 'required',
+        ]);
+
+        Penumpang::create($request->all());
+        return redirect('/penumpang')->with('success','Data penumpang ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Penumpang $penumpang)
+    public function edit($id)
     {
-        //
+        $penumpang = Penumpang::findOrFail($id);
+        return view('penumpang.edit', compact('penumpang'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Penumpang $penumpang)
+    public function update(Request $request, $id)
     {
-        //
+        $penumpang = Penumpang::findOrFail($id);
+
+        $request->validate([
+            'nik' => 'required',
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
+            'tgl_lahir' => 'required',
+            'no_telp' => 'required',
+            'email' => 'required|email',
+            'alamat' => 'required',
+        ]);
+
+        $penumpang->update($request->all());
+        return redirect('/penumpang')->with('success','Data diperbarui');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatePenumpangRequest $request, Penumpang $penumpang)
+    public function destroy($id)
     {
-        $penumpang->update($request->validated());
-        // Add redirect or response
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Penumpang $penumpang)
-    {
+        $penumpang = Penumpang::findOrFail($id);
         $penumpang->delete();
-        // Add redirect or response
+
+        return redirect('/penumpang')->with('success','Data dihapus');
     }
 }
