@@ -10,6 +10,7 @@
 <style>
 body{margin:0;font-family:'Poppins',sans-serif;background:#f4f6fb;}
 .wrapper{display:flex;height:100vh;}
+
 .sidebar{
     width:260px;background:linear-gradient(180deg,#4f46e5,#7c3aed);
     color:white;padding:25px 20px;display:flex;flex-direction:column;justify-content:space-between;
@@ -17,8 +18,8 @@ body{margin:0;font-family:'Poppins',sans-serif;background:#f4f6fb;}
 .logo-box{display:flex;align-items:center;gap:12px;margin-bottom:40px;}
 .logo{
     width:52px;height:52px;background:white;border-radius:14px;
-    display:flex;align-items:center;justify-content:center;font-size:26px;
-    color:#4f46e5;font-weight:bold;
+    display:flex;align-items:center;justify-content:center;
+    font-size:26px;color:#4f46e5;font-weight:bold;
 }
 .brand{font-size:20px;font-weight:700;}
 .menu a{
@@ -43,14 +44,27 @@ th,td{padding:14px;text-align:left;font-size:14px;}
 th{font-weight:700;border-bottom:2px solid #e5e7eb;}
 tr:nth-child(even){background:#f9fafb;}
 
-.badge-card{background:#dbeafe;color:#1e40af;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:600;}
-.badge-transfer{background:#fef3c7;color:#92400e;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:600;}
-.badge-cash{background:#dcfce7;color:#166534;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:600;}
+/* BADGE PAYMENT — UNGU */
+.badge-card,
+.badge-transfer,
+.badge-cash{
+    background:rgba(99,102,241,0.15);
+    color:#4f46e5;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
 
-.price{font-weight:700;color:#16a34a;}
+/* TOTAL PRICE — UNGU */
+.price{
+    font-weight:700;
+    color:#6366f1;
+}
 
+/* AKSI */
 .action a{
-    margin-right:10px;
+    margin-right:12px;
     text-decoration:none;
     font-weight:600;
     color:#4f46e5;
@@ -58,7 +72,7 @@ tr:nth-child(even){background:#f9fafb;}
 .action button{
     border:none;
     background:none;
-    color:red;
+    color:#ef4444;
     font-weight:600;
     cursor:pointer;
 }
@@ -80,7 +94,8 @@ tr:nth-child(even){background:#f9fafb;}
 }
 .form-actions{text-align:right;}
 .form-actions button{
-    background:#4f46e5;color:white;border:none;padding:8px 14px;border-radius:6px;font-weight:600;
+    background:#4f46e5;color:white;border:none;
+    padding:8px 14px;border-radius:6px;font-weight:600;
 }
 </style>
 </head>
