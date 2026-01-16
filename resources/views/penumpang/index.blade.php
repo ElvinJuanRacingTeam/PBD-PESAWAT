@@ -159,6 +159,7 @@ tr:nth-child(even){background:#f9fafb;}
         <div class="section">
             <table>
                 <tr>
+                    <th>ID Penumpang</th>
                     <th>NIK</th>
                     <th>Nama</th>
                     <th>Jenis Kelamin</th>
@@ -169,8 +170,9 @@ tr:nth-child(even){background:#f9fafb;}
                     <th>Aksi</th>
                 </tr>
 
-                @foreach($penumpang as $p)
+                @foreach($penumpang as $index => $p)
                 <tr>
+                    <td>P{{ $index + 1 }}</td>
                     <td>{{ $p->nik }}</td>
                     <td>{{ $p->nama }}</td>
                     <td>

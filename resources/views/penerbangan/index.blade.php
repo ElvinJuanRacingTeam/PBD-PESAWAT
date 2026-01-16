@@ -127,9 +127,9 @@ tr:nth-child(even){background:#f9fafb;}
                 <th>Aksi</th>
             </tr>
 
-            @foreach($penerbangan as $p)
+            @foreach($penerbangan as $index => $p)
             <tr>
-                <td>#FL-{{ $p->id_penerbangan }}</td>
+                <td>G{{ $index + 1 }}</td>
                 <td>{{ $p->kota_asal }} → {{ $p->kota_tujuan }}</td>
                 <td>{{ \Carbon\Carbon::parse($p->tgl_keberangkatan)->format('d M Y') }}</td>
                 <td>{{ $p->waktu_keberangkatan }}</td>

@@ -160,33 +160,33 @@ tr:nth-child(even){background:#f9fafb;}
 
         <table>
             <tr>
-                <th>Booking ID</th>
-                <th>Client Name</th>
-                <th>Flight Route</th>
-                <th>Seat</th>
-                <th>Booking Date</th>
-                <th>Payment</th>
-                <th>Total Price</th>
+                <th>ID Pemesanan</th>
+                <th>ID Penumpang</th>
+                <th>ID Penerbangan</th>
+                <th>Nomor Kursi</th>
+                <th>Total Harga</th>
+                <th>Tgl Pemesanan</th>
+                <th>Metode Pembayaran</th>
                 <th>Aksi</th>
             </tr>
 
-            @foreach($pemesanan as $p)
+            @foreach($pemesanan as $index => $p)
             <tr>
-                <td>#BK-{{ $p->id_pemesanan }}</td>
-                <td>{{ $p->penumpang->nama }}</td>
-                <td>{{ $p->penerbangan->kota_asal }} → {{ $p->penerbangan->kota_tujuan }}</td>
-                <td><strong>{{ $p->nomor_kursi }}</strong></td>
-                <td>{{ \Carbon\Carbon::parse($p->tgl_pemesanan)->format('d M Y') }}</td>
+                <td>S{{ $index + 1 }}</td>
+                <td>P{{ $p->id_penumpang }}</td>
+                <td>G{{ $p->id_penerbangan }}</td>
+                <td>{{ $p->nomor_kursi }}</td>
+                <td>{{ number_format($p->total_harga, 0, ',', '') }}</td>
+                <td>{{ \Carbon\Carbon::parse($p->tgl_pemesanan)->format('d/m/Y') }}</td>
                 <td>
                     @if($p->metode_pembayaran == 'Cash')
-                        <span class="badge-blue">Cash</span>
+                        Tunai
                     @elseif($p->metode_pembayaran == 'Transfer')
-                        <span class="badge-red">Transfer</span>
+                        Transfer Bank
                     @else
-                        <span class="badge-blue">Credit Card</span>
+                        {{ $p->metode_pembayaran }}
                     @endif
                 </td>
-                <td class="price">Rp {{ number_format($p->total_harga,0,',','.') }}</td>
                 <td class="action">
                     <a href="#" onclick="editBooking({{ $p->id_pemesanan }});return false;">Edit</a>
 
