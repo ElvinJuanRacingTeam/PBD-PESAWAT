@@ -24,6 +24,18 @@ Route::get('/logout', function(){
     return redirect('/');
 });
 
+
+/* REGISTER */
+Route::get('/register', function(){
+    return view('register');
+});
+
+Route::post('/register', function(){
+    // sementara langsung redirect ke login setelah daftar
+    return redirect('/');
+});
+
+
 /* DASHBOARD */
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
