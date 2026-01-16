@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pemesanan;
 use App\Models\Penumpang;
 use App\Models\Penerbangan;
+use Illuminate\Support\Facades\DB;
 
 class QueryController extends Controller
 {
@@ -56,9 +57,27 @@ class QueryController extends Controller
         ]);
     }
 
-    /* SOAL 2–5 placeholder */
+    /* SOAL 2–4 tetap */
     public function soal2(){ return response()->json([]); }
     public function soal3(){ return response()->json([]); }
     public function soal4(){ return response()->json([]); }
-    public function soal5(){ return response()->json([]); }
+
+    /* SOAL 5 → ANALYTICS REPORT */
+    public function soal5()
+    {
+        $data = DB::table('pemesanan')
+            ->join('penumpang','pemesanan.id_penumpang','=','penumpang.id_penumpang')
+            ->join('penerbangan','pemesanan.id_penerbangan','=','penerbangan.id_penerbangan')
+            ->select(
+                'penumpang.nama as client',
+                'penerbangan.kota_asal as origin',
+                'penerbangan.kota_tujuan as destination',
+                'pemesanan.total_harga as harga'
+            )
+            ->where('pemesanan.total_harga','>',1000000)
+            ->orderBy('pemesanan.total_harga','desc')
+            ->get();
+
+        return view('laporan.index', compact('data'));
+    }
 }

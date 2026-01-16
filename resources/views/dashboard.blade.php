@@ -72,7 +72,7 @@ tr:nth-child(even){background:#f9fafb;}
             <a href="/penumpang">Passenger Database</a>
             <a href="/penerbangan">Flight Schedule</a>
             <a href="/pemesanan">Ticket Bookings</a>
-            <a href="/soal1">Query Tugas</a>
+            <a href="/soal5">Analytics Report</a>
         </div>
     </div>
 

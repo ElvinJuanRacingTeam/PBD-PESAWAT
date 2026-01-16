@@ -122,7 +122,7 @@ tr:nth-child(even){background:#f9fafb;}
                 <a href="/penumpang" class="active">Passenger Database</a>
                 <a href="/penerbangan">Flight Schedule</a>
                 <a href="/pemesanan">Ticket Bookings</a>
-                <a href="/soal1">Query Tugas</a>
+                <a href="/soal5">Analytics Report</a>
             </div>
         </div>
 
@@ -182,6 +182,7 @@ tr:nth-child(even){background:#f9fafb;}
                     </td>
                     <td>{{ \Carbon\Carbon::parse($p->tgl_lahir)->format('d M Y') }}</td>
                     <td>{{ $p->no_telp }}</td>
+
                     <td>{{ $p->email }}</td>
                     <td>{{ $p->alamat }}</td>
                     <td class="action">

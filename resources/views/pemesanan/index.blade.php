@@ -117,7 +117,7 @@ tr:hover{background:#f9fafb;}
             <a href="/penumpang">Passenger Database</a>
             <a href="/penerbangan">Flight Schedule</a>
             <a href="/pemesanan" class="active">Ticket Bookings</a>
-            <a href="/soal1">Query Tugas</a>
+            <a href="/soal5">Analytics Report</a>
         </div>
     </div>
 
@@ -135,7 +135,7 @@ tr:hover{background:#f9fafb;}
 <div class="main">
 
     <div class="header">
-        <h1>🎫 Ticket Bookings</h1>
+        <h1>Ticket Bookings</h1>
         <a href="#" class="btn btn-primary" onclick="openModal('add'); return false;">+ New Booking</a>
     </div>
 
@@ -144,7 +144,7 @@ tr:hover{background:#f9fafb;}
         <table>
             <tr>
                 <th>Booking ID</th>
-                <th>Passenger</th>
+                <th>Client Name</th>
                 <th>Flight Route</th>
                 <th>Seat</th>
                 <th>Booking Date</th>
