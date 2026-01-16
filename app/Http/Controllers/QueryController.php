@@ -6,6 +6,7 @@ use App\Models\Pemesanan;
 use App\Models\Penumpang;
 use App\Models\Penerbangan;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class QueryController extends Controller
 {
@@ -41,7 +42,6 @@ class QueryController extends Controller
         ));
     }
 
-    /* SOAL 1 */
     public function soal1()
     {
         return Pemesanan::join('penumpang','pemesanan.id_penumpang','=','penumpang.id_penumpang')
@@ -57,12 +57,11 @@ class QueryController extends Controller
         ]);
     }
 
-    /* SOAL 2–4 */
     public function soal2(){ return response()->json([]); }
     public function soal3(){ return response()->json([]); }
     public function soal4(){ return response()->json([]); }
 
-    /* SOAL 5 – ANALYTICS REPORT */
+    /* ANALYTICS REPORT PAGE */
     public function soal5()
     {
         $data = DB::table('pemesanan')
@@ -81,5 +80,27 @@ class QueryController extends Controller
             ->get();
 
         return view('laporan.index', compact('data'));
+    }
+
+    /* EXPORT PDF */
+    public function exportPDF()
+    {
+        $data = DB::table('pemesanan')
+            ->join('penumpang','pemesanan.id_penumpang','=','penumpang.id_penumpang')
+            ->join('penerbangan','pemesanan.id_penerbangan','=','penerbangan.id_penerbangan')
+            ->select(
+                'penumpang.nama as client',
+                'penerbangan.kota_asal as origin',
+                'penerbangan.kota_tujuan as destination',
+                'pemesanan.total_harga as harga',
+                'pemesanan.nomor_kursi as seat',
+                'penerbangan.gerbang as gate'
+            )
+            ->where('pemesanan.total_harga','>',1000000)
+            ->orderBy('pemesanan.total_harga','desc')
+            ->get();
+
+        $pdf = Pdf::loadView('laporan.pdf', compact('data'));
+        return $pdf->download('analytics_report.pdf');
     }
 }

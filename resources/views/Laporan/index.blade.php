@@ -77,7 +77,11 @@ tr:nth-child(even){background:#f9fafb;}
             <h2>Analytics Intelligence Panel</h2>
             <p>Cross-database relational reporting enabled</p>
         </div>
-        <button style="padding:10px 18px;border:none;border-radius:8px;background:rgba(255,255,255,0.2);color:white;font-weight:600;">Export PDF</button>
+        <a href="/soal5/pdf"
+            style="padding:10px 18px;border-radius:8px;background:rgba(255,255,255,0.2);color:white;font-weight:600;text-decoration:none;">
+            Export PDF
+        </a>
+
     </div>
 
     <!-- PREMIUM SALES -->

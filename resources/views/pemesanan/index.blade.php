@@ -44,12 +44,18 @@ th,td{padding:14px;text-align:left;font-size:14px;}
 th{font-weight:700;border-bottom:2px solid #e5e7eb;}
 tr:nth-child(even){background:#f9fafb;}
 
-/* BADGE PAYMENT — UNGU */
-.badge-card,
-.badge-transfer,
-.badge-cash{
-    background:rgba(99,102,241,0.15);
-    color:#4f46e5;
+/* BADGE PAYMENT — BIRU & MERAH */
+.badge-blue{
+    background:#dbeafe;
+    color:#1e40af;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+.badge-red{
+    background:#fee2e2;
+    color:#991b1b;
     padding:6px 12px;
     border-radius:20px;
     font-size:12px;
@@ -157,12 +163,12 @@ tr:nth-child(even){background:#f9fafb;}
                 <td><strong>{{ $p->nomor_kursi }}</strong></td>
                 <td>{{ \Carbon\Carbon::parse($p->tgl_pemesanan)->format('d M Y') }}</td>
                 <td>
-                    @if($p->metode_pembayaran == 'Credit Card')
-                        <span class="badge-card">Credit Card</span>
+                    @if($p->metode_pembayaran == 'Cash')
+                        <span class="badge-blue">Cash</span>
                     @elseif($p->metode_pembayaran == 'Transfer')
-                        <span class="badge-transfer">Transfer</span>
+                        <span class="badge-red">Transfer</span>
                     @else
-                        <span class="badge-cash">Cash</span>
+                        <span class="badge-blue">Credit Card</span>
                     @endif
                 </td>
                 <td class="price">Rp {{ number_format($p->total_harga,0,',','.') }}</td>
