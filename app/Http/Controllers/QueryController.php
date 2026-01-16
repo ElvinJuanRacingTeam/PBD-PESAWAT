@@ -57,12 +57,12 @@ class QueryController extends Controller
         ]);
     }
 
-    /* SOAL 2–4 tetap */
+    /* SOAL 2–4 */
     public function soal2(){ return response()->json([]); }
     public function soal3(){ return response()->json([]); }
     public function soal4(){ return response()->json([]); }
 
-    /* SOAL 5 → ANALYTICS REPORT */
+    /* SOAL 5 – ANALYTICS REPORT */
     public function soal5()
     {
         $data = DB::table('pemesanan')
@@ -72,7 +72,9 @@ class QueryController extends Controller
                 'penumpang.nama as client',
                 'penerbangan.kota_asal as origin',
                 'penerbangan.kota_tujuan as destination',
-                'pemesanan.total_harga as harga'
+                'pemesanan.total_harga as harga',
+                'pemesanan.nomor_kursi as seat',
+                'penerbangan.gerbang as gate'
             )
             ->where('pemesanan.total_harga','>',1000000)
             ->orderBy('pemesanan.total_harga','desc')
