@@ -82,9 +82,16 @@ class QueryController extends Controller
         return view('laporan.index', compact('data'));
     }
 
-    /* EXPORT PDF */
-    public function exportPDF()
+    /* EXPORT CLIENT-SPECIFIC PDF */
+    public function exportClientPDF()
     {
+        $clientName = request()->query('client');
+        
+        if (!$clientName) {
+            return redirect()->back()->with('error', 'Client name is required');
+        }
+
+        // Fetch data for specific client only
         $data = DB::table('pemesanan')
             ->join('penumpang','pemesanan.id_penumpang','=','penumpang.id_penumpang')
             ->join('penerbangan','pemesanan.id_penerbangan','=','penerbangan.id_penerbangan')
@@ -97,10 +104,19 @@ class QueryController extends Controller
                 'penerbangan.gerbang as gate'
             )
             ->where('pemesanan.total_harga','>',1000000)
+            ->where('penumpang.nama', $clientName)
             ->orderBy('pemesanan.total_harga','desc')
             ->get();
 
-        $pdf = Pdf::loadView('laporan.pdf', compact('data'));
-        return $pdf->download('analytics_report.pdf');
+        // Calculate totals
+        $totalBookings = $data->count();
+        $totalRevenue = $data->sum('harga');
+
+        $pdf = Pdf::loadView('laporan.pdf', compact('data', 'clientName', 'totalBookings', 'totalRevenue'));
+        
+        // Clean filename
+        $filename = str_replace(' ', '_', $clientName) . '_Premium_Sales.pdf';
+        
+        return $pdf->download($filename);
     }
 }

@@ -25,7 +25,15 @@ body{margin:0;font-family:'Poppins',sans-serif;background:#f4f6fb;}
 }
 .menu a.active{background:rgba(255,255,255,0.25);}
 .menu a:hover{background:rgba(255,255,255,0.2);}
-.logout{color:#ffb4b4;text-decoration:none;font-size:13px;}
+.profile-box{
+    background:rgba(255,255,255,0.12);border-radius:14px;padding:15px;
+    display:flex;align-items:center;gap:10px;
+}
+.profile-circle{
+    width:40px;height:40px;border-radius:50%;background:#6366f1;
+    display:flex;align-items:center;justify-content:center;font-weight:700;
+}
+.logout{color:#ffb4b4;text-decoration:none;font-size:13px;margin-top:8px;display:inline-block;}
 
 .main{flex:1;padding:30px;}
 
@@ -79,8 +87,15 @@ tr:nth-child(even){background:#f9fafb;}
             <a href="/soal5">Analytics Report</a>
         </div>
     </div>
-
-    <a href="/logout" class="logout">Sign Out System</a>
+    <div>
+        <div class="profile-box">
+            <div class="profile-circle">AD</div>
+            <div class="profile-text">
+                <strong>Super Admin</strong><br>Management Level
+            </div>
+        </div>
+        <a href="/logout" class="logout">Sign Out System</a>
+    </div>
 </div>
 
 

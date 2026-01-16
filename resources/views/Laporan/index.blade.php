@@ -18,7 +18,15 @@ display:flex;align-items:center;justify-content:center;font-size:26px;color:#4f4
 .menu a{display:block;color:white;text-decoration:none;padding:12px;border-radius:10px;margin-bottom:8px;}
 .menu a.active{background:rgba(255,255,255,0.25);}
 .menu a:hover{background:rgba(255,255,255,0.2);}
-.logout{color:#ffb4b4;text-decoration:none;font-size:13px;}
+.profile-box{
+    background:rgba(255,255,255,0.12);border-radius:14px;padding:15px;
+    display:flex;align-items:center;gap:10px;
+}
+.profile-circle{
+    width:40px;height:40px;border-radius:50%;background:#6366f1;
+    display:flex;align-items:center;justify-content:center;font-weight:700;
+}
+.logout{color:#ffb4b4;text-decoration:none;font-size:13px;margin-top:8px;display:inline-block;}
 
 .main{flex:1;padding:30px;overflow-y:auto;}
 .header h1{margin:0;font-size:26px;font-weight:700;}
@@ -26,12 +34,37 @@ display:flex;align-items:center;justify-content:center;font-size:26px;color:#4f4
 .panel{
 background:linear-gradient(135deg,#6366f1,#8b5cf6);
 color:white;padding:25px;border-radius:15px;margin-bottom:25px;
-display:flex;justify-content:space-between;align-items:center;
 }
 
 .section{
 background:white;border-radius:15px;padding:25px;
 box-shadow:0 4px 12px rgba(0,0,0,0.06);margin-bottom:25px;
+}
+
+/* Search Box Styling */
+.search-box{
+    margin-bottom:20px;
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+.search-box input{
+    flex:1;
+    padding:12px 18px;
+    border:2px solid #e5e7eb;
+    border-radius:10px;
+    font-size:14px;
+    font-family:'Poppins',sans-serif;
+    transition:all 0.3s ease;
+}
+.search-box input:focus{
+    outline:none;
+    border-color:#6366f1;
+    box-shadow:0 0 0 3px rgba(99,102,241,0.1);
+}
+.search-box label{
+    font-weight:600;
+    color:#4f46e5;
 }
 
 table{width:100%;border-collapse:collapse;}
@@ -41,6 +74,32 @@ tr:nth-child(even){background:#f9fafb;}
 .price{font-weight:700;color:#4f46e5;}
 .seat{font-weight:700;color:#f97316;}
 .gate{font-weight:700;color:#0ea5e9;}
+
+/* Export Button in Table */
+.btn-export{
+    display:inline-block;
+    padding:8px 16px;
+    background:linear-gradient(135deg,#6366f1,#8b5cf6);
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-size:12px;
+    font-weight:600;
+    transition:all 0.3s ease;
+}
+.btn-export:hover{
+    transform:translateY(-2px);
+    box-shadow:0 4px 12px rgba(99,102,241,0.4);
+}
+
+/* No results message */
+.no-results{
+    text-align:center;
+    padding:40px;
+    color:#94a3b8;
+    font-size:16px;
+    display:none;
+}
 </style>
 </head>
 <body>
@@ -62,8 +121,15 @@ tr:nth-child(even){background:#f9fafb;}
             <a href="/soal5" class="active">Analytics Report</a>
         </div>
     </div>
-
-    <a href="/logout" class="logout">Sign Out System</a>
+    <div>
+        <div class="profile-box">
+            <div class="profile-circle">AD</div>
+            <div class="profile-text">
+                <strong>Super Admin</strong><br>Management Level
+            </div>
+        </div>
+        <a href="/logout" class="logout">Sign Out System</a>
+    </div>
 </div>
 
 <div class="main">
@@ -77,36 +143,55 @@ tr:nth-child(even){background:#f9fafb;}
             <h2>Analytics Intelligence Panel</h2>
             <p>Cross-database relational reporting enabled</p>
         </div>
-        <a href="/soal5/pdf"
-            style="padding:10px 18px;border-radius:8px;background:rgba(255,255,255,0.2);color:white;font-weight:600;text-decoration:none;">
-            Export PDF
-        </a>
-
     </div>
 
     <!-- PREMIUM SALES -->
     <div class="section">
         <h3>Premium Sales Analysis</h3>
         <p>Pemesanan di atas Rp 1.000.000 diurutkan dari harga tertinggi</p>
-        <br>
+        
+        <!-- Search Box -->
+        <div class="search-box">
+            
+            <input 
+                type="text" 
+                id="searchInput" 
+                placeholder="Type client name to filter..."
+                onkeyup="filterTable()"
+            >
+        </div>
 
-        <table>
+        <table id="premiumSalesTable">
+            <thead>
             <tr>
                 <th>CLIENT NAME</th>
                 <th>ORIGIN</th>
                 <th>DESTINATION</th>
                 <th>PRICE</th>
+                <th>ACTIONS</th>
             </tr>
-
+            </thead>
+            <tbody>
             @foreach($data as $d)
             <tr>
                 <td>{{ $d->client }}</td>
                 <td>{{ $d->origin }}</td>
                 <td>{{ $d->destination }}</td>
                 <td class="price">Rp {{ number_format($d->harga,0,',','.') }}</td>
+                <td>
+                    <a href="/soal5/export-client-pdf?client={{ urlencode($d->client) }}" 
+                       class="btn-export">
+                        Export PDF
+                    </a>
+                </td>
             </tr>
             @endforeach
+            </tbody>
         </table>
+        
+        <div class="no-results" id="noResults">
+            No clients found matching your search.
+        </div>
     </div>
 
     <!-- HIGH SEASON MANIFEST -->
@@ -136,6 +221,41 @@ tr:nth-child(even){background:#f9fafb;}
 
 </div>
 </div>
+
+<script>
+function filterTable() {
+    const input = document.getElementById('searchInput');
+    const filter = input.value.toUpperCase();
+    const table = document.getElementById('premiumSalesTable');
+    const tbody = table.getElementsByTagName('tbody')[0];
+    const rows = tbody.getElementsByTagName('tr');
+    const noResults = document.getElementById('noResults');
+    
+    let visibleCount = 0;
+    
+    for (let i = 0; i < rows.length; i++) {
+        const clientCell = rows[i].getElementsByTagName('td')[0];
+        if (clientCell) {
+            const clientName = clientCell.textContent || clientCell.innerText;
+            if (clientName.toUpperCase().indexOf(filter) > -1) {
+                rows[i].style.display = '';
+                visibleCount++;
+            } else {
+                rows[i].style.display = 'none';
+            }
+        }
+    }
+    
+    // Show/hide no results message
+    if (visibleCount === 0) {
+        noResults.style.display = 'block';
+        table.style.display = 'none';
+    } else {
+        noResults.style.display = 'none';
+        table.style.display = 'table';
+    }
+}
+</script>
 
 </body>
 </html>

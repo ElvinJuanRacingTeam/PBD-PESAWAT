@@ -37,5 +37,5 @@ Route::get('/soal1', [QueryController::class, 'soal1']);
 Route::get('/soal2', [QueryController::class, 'soal2']);
 Route::get('/soal3', [QueryController::class, 'soal3']);
 Route::get('/soal4', [QueryController::class, 'soal4']);
-Route::get('/soal5', [QueryController::class, 'soal5']); 
-Route::get('/soal5/pdf', [QueryController::class, 'exportPDF']);
+Route::get('/soal5', [QueryController::class, 'soal5']);
+Route::get('/soal5/export-client-pdf', [QueryController::class, 'exportClientPDF']);
