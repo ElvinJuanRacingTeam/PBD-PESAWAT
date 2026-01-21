@@ -42,12 +42,25 @@ h2{margin:8px 0 4px;font-size:24px;color:#1f2937;}
 .subtitle{font-size:11px;letter-spacing:2px;color:#9ca3af;margin-bottom:22px;}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 label{display:block;text-align:left;font-size:11px;font-weight:600;color:#6b7280;margin-bottom:6px;}
-input,select{width:100%;padding:11px;border-radius:10px;border:1px solid #e5e7eb;background:#f9fafb;font-size:14px;}
+input,select{
+    width:100%;
+    padding:11px;
+    border-radius:10px;
+    border:1px solid #e5e7eb;
+    background:#f9fafb;
+    font-size:14px;
+}
 .full{grid-column:1 / span 2;}
 button{
-    width:100%;padding:13px;border:none;border-radius:12px;
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:12px;
     background:linear-gradient(135deg,#10b981,#059669);
-    color:white;font-weight:600;font-size:14px;cursor:pointer;
+    color:white;
+    font-weight:600;
+    font-size:14px;
+    cursor:pointer;
 }
 .login-link{margin-top:16px;font-size:12px;color:#9ca3af;}
 .login-link a{color:#10b981;text-decoration:none;font-weight:600;}
@@ -62,7 +75,6 @@ button{
     <h2>Ayo Terbang</h2>
     <div class="subtitle">CREATE ADMIN & PASSENGER DATA</div>
 
-    <!-- FORM REVISI -->
     <form method="POST" action="/register">
         @csrf
 
@@ -100,6 +112,11 @@ button{
             <div>
                 <label>EMAIL</label>
                 <input type="email" name="email" placeholder="email@example.com" required>
+            </div>
+
+            <div class="full">
+                <label>ALAMAT</label>
+                <input type="text" name="alamat" placeholder="Alamat lengkap" required>
             </div>
 
             <div class="full">

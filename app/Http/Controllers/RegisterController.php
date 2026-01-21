@@ -22,6 +22,7 @@ class RegisterController extends Controller
             'password' => bcrypt($r->password)
         ]);
 
-        return redirect('/penumpang');
+        return redirect('/')->with('success','Register berhasil, silakan login');
+
     }
 }

@@ -85,16 +85,26 @@ body{
     padding:20px;
     box-shadow:0 4px 12px rgba(0,0,0,0.06);
 }
+
+/* ===== TABEL STABIL ===== */
 table{
     width:100%;
     border-collapse:collapse;
 }
 th,td{
-    padding:12px;
+    padding:14px;
     text-align:left;
     font-size:14px;
+    vertical-align:middle;
+    white-space:nowrap;
 }
 tr:nth-child(even){background:#f9fafb;}
+
+th:nth-child(3), td:nth-child(3){ width:240px; } /* Nama */
+th:nth-child(7), td:nth-child(7){ width:200px; } /* Email */
+th:nth-child(8), td:nth-child(8){ width:200px; } /* Alamat */
+th:nth-child(9), td:nth-child(9){ width:120px; } /* Aksi */
+
 .badge{
     padding:4px 10px;
     border-radius:20px;
@@ -150,13 +160,14 @@ tr:nth-child(even){background:#f9fafb;}
         <div class="section">
             <table>
                 <tr>
-                    <th>ID Penumpang</th>
+                    <th>ID<br>Penumpang</th>
                     <th>NIK</th>
                     <th>Nama</th>
                     <th>Jenis Kelamin</th>
                     <th>Tanggal Lahir</th>
                     <th>No Telepon</th>
                     <th>Email</th>
+                    <th>Alamat</th>
                     <th>Aksi</th>
                 </tr>
 
@@ -175,9 +186,9 @@ tr:nth-child(even){background:#f9fafb;}
                     <td>{{ \Carbon\Carbon::parse($p->tgl_lahir)->format('d M Y') }}</td>
                     <td>{{ $p->no_telp }}</td>
                     <td>{{ $p->email }}</td>
+                    <td>{{ $p->alamat }}</td>
                     <td class="action">
                         <a href="{{ route('penumpang.edit', $p->id_penumpang) }}">Edit</a>
-
                         <form action="{{ route('penumpang.destroy', $p->id_penumpang) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
