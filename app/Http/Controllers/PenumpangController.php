@@ -30,7 +30,16 @@ class PenumpangController extends Controller
             'alamat' => 'required'
         ]);
 
-        Penumpang::create($request->all());
+        Penumpang::create([
+            'nik' => $request->nik,
+            'nama' => $request->nama,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'tgl_lahir' => $request->tgl_lahir,
+            'no_telp' => $request->no_telp,
+            'email' => $request->email,
+            'alamat' => $request->alamat
+        ]);
+
         return redirect()->route('penumpang.index');
     }
 
@@ -45,6 +54,7 @@ class PenumpangController extends Controller
         $penumpang = Penumpang::where('id_penumpang',$id)->firstOrFail();
 
         $request->validate([
+            'nik' => 'required|unique:penumpang,nik,'.$penumpang->id_penumpang.',id_penumpang',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'tgl_lahir' => 'required|date',
@@ -53,7 +63,16 @@ class PenumpangController extends Controller
             'alamat' => 'required'
         ]);
 
-        $penumpang->update($request->all());
+        $penumpang->update([
+            'nik' => $request->nik,
+            'nama' => $request->nama,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'tgl_lahir' => $request->tgl_lahir,
+            'no_telp' => $request->no_telp,
+            'email' => $request->email,
+            'alamat' => $request->alamat
+        ]);
+
         return redirect()->route('penumpang.index');
     }
 
