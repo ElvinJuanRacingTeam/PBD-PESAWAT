@@ -67,13 +67,33 @@ box-shadow:0 4px 12px rgba(0,0,0,0.06);margin-bottom:25px;
     color:#4f46e5;
 }
 
-table{width:100%;border-collapse:collapse;}
-th,td{padding:14px;text-align:left;font-size:14px;}
+/* Tabel Responsif */
+.table-wrapper{width:100%;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;table-layout:auto;min-width:500px;}
+th,td{padding:12px 10px;text-align:left;font-size:13px;word-wrap:break-word;word-break:break-word;}
 th{color:#94a3b8;border-bottom:2px solid #e5e7eb;}
 tr:nth-child(even){background:#f9fafb;}
 .price{font-weight:700;color:#4f46e5;}
 .seat{font-weight:700;color:#f97316;}
 .gate{font-weight:700;color:#0ea5e9;}
+
+@media (max-width: 1200px) {
+    th, td { padding: 10px 8px; font-size: 12px; }
+}
+@media (max-width: 992px) {
+    .main { padding: 20px; }
+    th, td { padding: 8px 6px; font-size: 11px; }
+}
+@media (max-width: 768px) {
+    .wrapper { flex-direction: column; }
+    .sidebar { width: 100%; padding: 15px; flex-direction: row; justify-content: space-between; align-items: center; }
+    .menu { display: flex; gap: 5px; flex-wrap: wrap; }
+    .menu a { padding: 8px 10px; margin-bottom: 0; font-size: 12px; }
+    .profile-box { display: none; }
+    .main { padding: 15px; }
+    .panel { padding: 15px; }
+    .section { padding: 15px; }
+}
 
 /* Export Button in Table */
 .btn-export{
@@ -161,33 +181,35 @@ tr:nth-child(even){background:#f9fafb;}
             >
         </div>
 
-        <table id="premiumSalesTable">
-            <thead>
-            <tr>
-                <th>CLIENT NAME</th>
-                <th>ORIGIN</th>
-                <th>DESTINATION</th>
-                <th>PRICE</th>
-                <th>ACTIONS</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($data as $d)
-            <tr>
-                <td>{{ $d->client }}</td>
-                <td>{{ $d->origin }}</td>
-                <td>{{ $d->destination }}</td>
-                <td class="price">Rp {{ number_format($d->harga,0,',','.') }}</td>
-                <td>
-                    <a href="/soal5/export-client-pdf?client={{ urlencode($d->client) }}" 
-                       class="btn-export">
-                        Export PDF
-                    </a>
-                </td>
-            </tr>
-            @endforeach
-            </tbody>
-        </table>
+        <div class="table-wrapper">
+            <table id="premiumSalesTable">
+                <thead>
+                <tr>
+                    <th>CLIENT NAME</th>
+                    <th>ORIGIN</th>
+                    <th>DESTINATION</th>
+                    <th>PRICE</th>
+                    <th>ACTIONS</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($data as $d)
+                <tr>
+                    <td>{{ $d->client }}</td>
+                    <td>{{ $d->origin }}</td>
+                    <td>{{ $d->destination }}</td>
+                    <td class="price">Rp {{ number_format($d->harga,0,',','.') }}</td>
+                    <td>
+                        <a href="/soal5/export-client-pdf?client={{ urlencode($d->client) }}" 
+                           class="btn-export">
+                            Export PDF
+                        </a>
+                    </td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
         
         <div class="no-results" id="noResults">
             No clients found matching your search.
@@ -200,23 +222,25 @@ tr:nth-child(even){background:#f9fafb;}
         <p>Manifest pemesanan kelas premium</p>
         <br>
 
-        <table>
-            <tr>
-                <th>FORMATTED IDENTITY</th>
-                <th>ROUTE INFO</th>
-                <th>SEAT</th>
-                <th>GATE</th>
-            </tr>
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>FORMATTED IDENTITY</th>
+                    <th>ROUTE INFO</th>
+                    <th>SEAT</th>
+                    <th>GATE</th>
+                </tr>
 
-            @foreach($data as $d)
-            <tr>
-                <td>{{ strtoupper($d->client) }}</td>
-                <td>{{ $d->origin }} → {{ $d->destination }}</td>
-                <td class="seat">{{ $d->seat }}</td>
-                <td class="gate">{{ $d->gate }}</td>
-            </tr>
-            @endforeach
-        </table>
+                @foreach($data as $d)
+                <tr>
+                    <td>{{ strtoupper($d->client) }}</td>
+                    <td>{{ $d->origin }} → {{ $d->destination }}</td>
+                    <td class="seat">{{ $d->seat }}</td>
+                    <td class="gate">{{ $d->gate }}</td>
+                </tr>
+                @endforeach
+            </table>
+        </div>
     </div>
 
 </div>

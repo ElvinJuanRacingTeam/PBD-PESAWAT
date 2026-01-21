@@ -65,10 +65,28 @@ body{margin:0;font-family:'Poppins',sans-serif;background:#f4f6fb;}
     box-shadow:0 4px 12px rgba(0,0,0,0.06);
 }
 
-table{width:100%;border-collapse:collapse;}
-th,td{padding:14px;text-align:left;font-size:14px;}
+/* Tabel Responsif */
+.table-wrapper{width:100%;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;table-layout:auto;min-width:700px;}
+th,td{padding:12px 10px;text-align:left;font-size:13px;word-wrap:break-word;word-break:break-word;}
 th{font-weight:700;border-bottom:2px solid #e5e7eb;}
 tr:nth-child(even){background:#f9fafb;}
+
+@media (max-width: 1200px) {
+    th, td { padding: 10px 8px; font-size: 12px; }
+}
+@media (max-width: 992px) {
+    .main { padding: 20px; }
+    th, td { padding: 8px 6px; font-size: 11px; }
+}
+@media (max-width: 768px) {
+    .wrapper { flex-direction: column; }
+    .sidebar { width: 100%; padding: 15px; flex-direction: row; justify-content: space-between; align-items: center; }
+    .menu { display: flex; gap: 5px; }
+    .menu a { padding: 8px 10px; margin-bottom: 0; font-size: 12px; }
+    .profile-box { display: none; }
+    .main { padding: 15px; }
+}
 
 .badge{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;}
 .economy{background:#dbeafe;color:#1d4ed8;}
@@ -160,6 +178,7 @@ style="background:#4f46e5;color:white;padding:8px 14px;border-radius:8px;text-de
 <br><br>
 
 <div class="section">
+<div class="table-wrapper">
 <table>
 <tr>
 <th>Flight ID</th>
@@ -204,6 +223,7 @@ style="background:#4f46e5;color:white;padding:8px 14px;border-radius:8px;text-de
 @endforeach
 
 </table>
+</div>
 </div>
 </div>
 </div>

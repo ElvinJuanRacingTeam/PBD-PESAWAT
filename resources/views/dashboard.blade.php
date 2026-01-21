@@ -50,10 +50,30 @@ body{margin:0;font-family:'Poppins',sans-serif;background:#f4f6fb;}
     background:white;margin-top:30px;border-radius:15px;padding:20px;
     box-shadow:0 4px 12px rgba(0,0,0,0.06);
 }
-table{width:100%;border-collapse:collapse;}
-th,td{padding:12px;text-align:left;font-size:14px;}
+/* Tabel Responsif */
+.table-wrapper{width:100%;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;table-layout:auto;min-width:400px;}
+th,td{padding:12px 10px;text-align:left;font-size:13px;word-wrap:break-word;word-break:break-word;}
 tr:nth-child(even){background:#f9fafb;}
 .price{font-weight:700;}
+
+@media (max-width: 1200px) {
+    th, td { padding: 10px 8px; font-size: 12px; }
+}
+@media (max-width: 992px) {
+    .main { padding: 20px; }
+    th, td { padding: 8px 6px; font-size: 11px; }
+}
+@media (max-width: 768px) {
+    .wrapper { flex-direction: column; }
+    .sidebar { width: 100%; padding: 15px; flex-direction: row; justify-content: space-between; align-items: center; }
+    .menu { display: flex; gap: 5px; flex-wrap: wrap; }
+    .menu a { padding: 8px 10px; margin-bottom: 0; font-size: 12px; }
+    .profile-box { display: none; }
+    .main { padding: 15px; }
+    .cards { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .card { padding: 15px; }
+}
 </style>
 </head>
 <body>
@@ -100,44 +120,48 @@ tr:nth-child(even){background:#f9fafb;}
 
     <div class="section">
         <h3>Recent Bookings</h3>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Passenger</th>
-                <th>Seat</th>
-                <th>Price</th>
-            </tr>
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Passenger</th>
+                    <th>Seat</th>
+                    <th>Price</th>
+                </tr>
 
-            @foreach($recentBookings as $b)
-            <tr>
-                <td>#BK-{{ $b->id_pemesanan }}</td>
-                <td>{{ $b->penumpang->nama ?? 'N/A' }}</td>
-                <td>{{ $b->nomor_kursi }}</td>
-                <td class="price">Rp {{ number_format($b->total_harga,0,',','.') }}</td>
-            </tr>
-            @endforeach
+                @foreach($recentBookings as $b)
+                <tr>
+                    <td>#BK-{{ $b->id_pemesanan }}</td>
+                    <td>{{ $b->penumpang->nama ?? 'N/A' }}</td>
+                    <td>{{ $b->nomor_kursi }}</td>
+                    <td class="price">Rp {{ number_format($b->total_harga,0,',','.') }}</td>
+                </tr>
+                @endforeach
 
-        </table>
+            </table>
+        </div>
     </div>
 
     <div class="section">
         <h3>Incoming Flights</h3>
-        <table>
-            <tr>
-                <th>Route</th>
-                <th>Class</th>
-                <th>Departure</th>
-            </tr>
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>Route</th>
+                    <th>Class</th>
+                    <th>Departure</th>
+                </tr>
 
-            @foreach($incomingFlights as $f)
-            <tr>
-                <td>{{ $f->kota_asal }} → {{ $f->kota_tujuan }}</td>
-                <td>{{ $f->kelas }}</td>
-                <td>{{ \Carbon\Carbon::parse($f->tgl_keberangkatan)->format('d M Y') }}</td>
-            </tr>
-            @endforeach
+                @foreach($incomingFlights as $f)
+                <tr>
+                    <td>{{ $f->kota_asal }} → {{ $f->kota_tujuan }}</td>
+                    <td>{{ $f->kelas }}</td>
+                    <td>{{ \Carbon\Carbon::parse($f->tgl_keberangkatan)->format('d M Y') }}</td>
+                </tr>
+                @endforeach
 
-        </table>
+            </table>
+        </div>
     </div>
 
 </div>

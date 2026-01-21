@@ -86,24 +86,70 @@ body{
     box-shadow:0 4px 12px rgba(0,0,0,0.06);
 }
 
-/* ===== TABEL STABIL ===== */
+/* ===== TABEL RESPONSIF ===== */
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+}
 table{
     width:100%;
     border-collapse:collapse;
+    table-layout:auto;
+    min-width:600px;
 }
 th,td{
-    padding:14px;
+    padding:12px 10px;
     text-align:left;
-    font-size:14px;
+    font-size:13px;
     vertical-align:middle;
-    white-space:nowrap;
+    word-wrap:break-word;
+    word-break:break-word;
 }
 tr:nth-child(even){background:#f9fafb;}
 
-th:nth-child(3), td:nth-child(3){ width:240px; } /* Nama */
-th:nth-child(7), td:nth-child(7){ width:200px; } /* Email */
-th:nth-child(8), td:nth-child(8){ width:200px; } /* Alamat */
-th:nth-child(9), td:nth-child(9){ width:120px; } /* Aksi */
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    th, td {
+        padding: 10px 8px;
+        font-size: 12px;
+    }
+}
+@media (max-width: 992px) {
+    .main {
+        padding: 20px;
+    }
+    th, td {
+        padding: 8px 6px;
+        font-size: 11px;
+    }
+}
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        padding: 15px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .menu {
+        display: flex;
+        gap: 5px;
+    }
+    .menu a {
+        padding: 8px 10px;
+        margin-bottom: 0;
+        font-size: 12px;
+    }
+    .profile-box {
+        display: none;
+    }
+    .main {
+        padding: 15px;
+    }
+}
 
 .badge{
     padding:4px 10px;
@@ -158,49 +204,50 @@ th:nth-child(9), td:nth-child(9){ width:120px; } /* Aksi */
         <br>
 
         <div class="section">
-            <table>
-                <tr>
-                    <th>ID<br>Penumpang</th>
-                    <th>NIK</th>
-                    <th>Nama</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Tanggal Lahir</th>
-                    <th>No Telepon</th>
-                    <th>Email</th>
-                    <th>Alamat</th>
-                    <th>Aksi</th>
-                </tr>
+            <div class="table-wrapper">
+                <table>
+                    <tr>
+                        <th>ID Penumpang</th>
+                        <th>NIK</th>
+                        <th>Nama</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Tanggal Lahir</th>
+                        <th>No Telepon</th>
+                        <th>Email</th>
+                        <th>Alamat</th>
+                        <th>Aksi</th>
+                    </tr>
 
-                @foreach($penumpang as $index => $p)
-                <tr>
-                    <td>P{{ $index + 1 }}</td>
-                    <td>{{ $p->nik }}</td>
-                    <td>{{ $p->nama }}</td>
-                    <td>
-                        @if($p->jenis_kelamin == 'L')
-                            <span class="badge male">LAKI-LAKI</span>
-                        @else
-                            <span class="badge female">PEREMPUAN</span>
-                        @endif
-                    </td>
-                    <td>{{ \Carbon\Carbon::parse($p->tgl_lahir)->format('d M Y') }}</td>
-                    <td>{{ $p->no_telp }}</td>
-                    <td>{{ $p->email }}</td>
-                    <td>{{ $p->alamat }}</td>
-                    <td class="action">
-                        <a href="{{ route('penumpang.edit', $p->id_penumpang) }}">Edit</a>
-                        <form action="{{ route('penumpang.destroy', $p->id_penumpang) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" style="border:none;background:none;color:red;font-weight:600;cursor:pointer;">
-                                Hapus
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-
-            </table>
+                    @foreach($penumpang as $index => $p)
+                    <tr>
+                        <td>P{{ $index + 1 }}</td>
+                        <td>{{ $p->nik }}</td>
+                        <td>{{ $p->nama }}</td>
+                        <td>
+                            @if($p->jenis_kelamin == 'L')
+                                <span class="badge male">LAKI-LAKI</span>
+                            @else
+                                <span class="badge female">PEREMPUAN</span>
+                            @endif
+                        </td>
+                        <td>{{ \Carbon\Carbon::parse($p->tgl_lahir)->format('d M Y') }}</td>
+                        <td>{{ $p->no_telp }}</td>
+                        <td>{{ $p->email }}</td>
+                        <td>{{ $p->alamat }}</td>
+                        <td class="action">
+                            <a href="{{ route('penumpang.edit', $p->id_penumpang) }}">Edit</a>
+                            <form action="{{ route('penumpang.destroy', $p->id_penumpang) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" style="border:none;background:none;color:red;font-weight:600;cursor:pointer;">
+                                    Hapus
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </table>
+            </div>
         </div>
 
     </div>
