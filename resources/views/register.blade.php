@@ -17,103 +17,41 @@ body{
     align-items:center;
     height:100vh;
 }
-
 .card{
-    background:#fbfaff;
-    width:480px;
-    padding:40px;
-    border-radius:22px;
-    box-shadow:0 15px 40px rgba(0,0,0,0.15);
+    background:#ffffff;
+    width:520px;
+    padding:35px 40px;
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.15);
     text-align:center;
 }
-
 .logo{
-    width:70px;
-    height:70px;
+    width:65px;
+    height:65px;
     margin:0 auto 15px;
     background:linear-gradient(135deg,#10b981,#059669);
-    border-radius:18px;
+    border-radius:16px;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:32px;
+    font-size:30px;
     color:white;
     font-weight:bold;
 }
-
-h2{
-    margin:10px 0 5px;
-    font-size:26px;
-    color:#1f2937;
-}
-
-.subtitle{
-    font-size:12px;
-    letter-spacing:2px;
-    color:#9ca3af;
-    margin-bottom:25px;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-}
-
-label{
-    display:block;
-    text-align:left;
-    font-size:12px;
-    font-weight:600;
-    color:#9ca3af;
-    margin-bottom:6px;
-}
-
-input{
-    width:100%;
-    padding:12px;
-    border-radius:12px;
-    border:1px solid #e5e7eb;
-    background:#f9fafb;
-    font-size:14px;
-}
-
-.full{
-    grid-column:1 / span 2;
-}
-
+h2{margin:8px 0 4px;font-size:24px;color:#1f2937;}
+.subtitle{font-size:11px;letter-spacing:2px;color:#9ca3af;margin-bottom:22px;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+label{display:block;text-align:left;font-size:11px;font-weight:600;color:#6b7280;margin-bottom:6px;}
+input,select{width:100%;padding:11px;border-radius:10px;border:1px solid #e5e7eb;background:#f9fafb;font-size:14px;}
+.full{grid-column:1 / span 2;}
 button{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:14px;
+    width:100%;padding:13px;border:none;border-radius:12px;
     background:linear-gradient(135deg,#10b981,#059669);
-    color:white;
-    font-weight:600;
-    font-size:15px;
-    cursor:pointer;
-    box-shadow:0 10px 25px rgba(16,185,129,0.45);
-    margin-top:10px;
+    color:white;font-weight:600;font-size:14px;cursor:pointer;
 }
-
-.login-link{
-    margin-top:18px;
-    font-size:13px;
-    color:#9ca3af;
-}
-
-.login-link a{
-    color:#10b981;
-    text-decoration:none;
-    font-weight:600;
-}
-
-.footer{
-    margin-top:25px;
-    font-size:11px;
-    letter-spacing:3px;
-    color:#cbd5e1;
-}
+.login-link{margin-top:16px;font-size:12px;color:#9ca3af;}
+.login-link a{color:#10b981;text-decoration:none;font-weight:600;}
+.footer{margin-top:18px;font-size:10px;letter-spacing:3px;color:#cbd5e1;}
 </style>
 </head>
 <body>
@@ -122,8 +60,9 @@ button{
 
     <div class="logo">✈</div>
     <h2>Ayo Terbang</h2>
-    <div class="subtitle">CREATE ADMIN CREDENTIALS</div>
+    <div class="subtitle">CREATE ADMIN & PASSENGER DATA</div>
 
+    <!-- FORM REVISI -->
     <form method="POST" action="/register">
         @csrf
 
@@ -135,18 +74,37 @@ button{
             </div>
 
             <div>
-                <label>FULL NAME</label>
-                <input type="text" name="name" placeholder="Full Name" required>
+                <label>NAMA LENGKAP</label>
+                <input type="text" name="nama" placeholder="Full Name" required>
             </div>
 
-            <div class="full">
-                <label>EMAIL ADDRESS</label>
-                <input type="email" name="email" placeholder="admin@ayotebang.com" required>
+            <div>
+                <label>JENIS KELAMIN</label>
+                <select name="jenis_kelamin" required>
+                    <option value="">Pilih</option>
+                    <option value="L">Laki-Laki</option>
+                    <option value="P">Perempuan</option>
+                </select>
+            </div>
+
+            <div>
+                <label>TANGGAL LAHIR</label>
+                <input type="date" name="tgl_lahir" required>
+            </div>
+
+            <div>
+                <label>NO TELEPON</label>
+                <input type="text" name="no_telp" placeholder="08xxxxxxxxxx" required>
+            </div>
+
+            <div>
+                <label>EMAIL</label>
+                <input type="email" name="email" placeholder="email@example.com" required>
             </div>
 
             <div class="full">
                 <label>PASSWORD</label>
-                <input type="password" name="password" placeholder="••••••••" required>
+                <input type="password" name="password" required>
             </div>
 
         </div>

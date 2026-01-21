@@ -55,28 +55,36 @@ body{
 .menu a:hover{background:rgba(255,255,255,0.2);}
 .menu a.active{background:rgba(255,255,255,0.25);}
 .profile-box{
-    background:rgba(255,255,255,0.12);border-radius:14px;padding:15px;
-    display:flex;align-items:center;gap:10px;
+    background:rgba(255,255,255,0.12);
+    border-radius:14px;
+    padding:15px;
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 .profile-circle{
-    width:40px;height:40px;border-radius:50%;background:#6366f1;
+    width:40px;height:40px;border-radius:50%;
+    background:#6366f1;
     display:flex;align-items:center;justify-content:center;font-weight:700;
 }
-.logout{color:#ffb4b4;text-decoration:none;font-size:13px;margin-top:8px;display:inline-block;}
-
+.logout{
+    color:#ffb4b4;
+    text-decoration:none;
+    font-size:13px;
+    margin-top:8px;
+    display:inline-block;
+}
 .main{
     flex:1;
     padding:30px;
     overflow-y:auto;
 }
-
 .section{
     background:white;
     border-radius:15px;
     padding:20px;
     box-shadow:0 4px 12px rgba(0,0,0,0.06);
 }
-
 table{
     width:100%;
     border-collapse:collapse;
@@ -87,7 +95,6 @@ th,td{
     font-size:14px;
 }
 tr:nth-child(even){background:#f9fafb;}
-
 .badge{
     padding:4px 10px;
     border-radius:20px;
@@ -96,7 +103,6 @@ tr:nth-child(even){background:#f9fafb;}
 }
 .male{background:#dbeafe;color:#1d4ed8;}
 .female{background:#fce7f3;color:#be185d;}
-
 .action a{
     margin-right:10px;
     text-decoration:none;
@@ -109,7 +115,6 @@ tr:nth-child(even){background:#f9fafb;}
 
 <div class="wrapper">
 
-    <!-- SIDEBAR -->
     <div class="sidebar">
         <div>
             <div class="logo-box">
@@ -137,24 +142,10 @@ tr:nth-child(even){background:#f9fafb;}
         </div>
     </div>
 
-
-    <!-- MAIN -->
     <div class="main">
 
         <h2>Passenger Database</h2>
         <br>
-
-        <a href="{{ route('penumpang.create') }}" style="
-            background:#4f46e5;
-            color:white;
-            padding:8px 14px;
-            border-radius:8px;
-            text-decoration:none;
-            font-weight:600;">
-            + Tambah Penumpang
-        </a>
-
-        <br><br>
 
         <div class="section">
             <table>
@@ -166,7 +157,6 @@ tr:nth-child(even){background:#f9fafb;}
                     <th>Tanggal Lahir</th>
                     <th>No Telepon</th>
                     <th>Email</th>
-                    <th>Alamat</th>
                     <th>Aksi</th>
                 </tr>
 
@@ -184,11 +174,8 @@ tr:nth-child(even){background:#f9fafb;}
                     </td>
                     <td>{{ \Carbon\Carbon::parse($p->tgl_lahir)->format('d M Y') }}</td>
                     <td>{{ $p->no_telp }}</td>
-
                     <td>{{ $p->email }}</td>
-                    <td>{{ $p->alamat }}</td>
                     <td class="action">
-
                         <a href="{{ route('penumpang.edit', $p->id_penumpang) }}">Edit</a>
 
                         <form action="{{ route('penumpang.destroy', $p->id_penumpang) }}" method="POST" style="display:inline;">
@@ -198,7 +185,6 @@ tr:nth-child(even){background:#f9fafb;}
                                 Hapus
                             </button>
                         </form>
-
                     </td>
                 </tr>
                 @endforeach

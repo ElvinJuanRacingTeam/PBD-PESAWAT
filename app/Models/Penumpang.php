@@ -17,6 +17,6 @@ class Penumpang extends Model
         'tgl_lahir',
         'no_telp',
         'email',
-        'alamat'
+        'password'   // ← tambahkan ini
     ];
 }

@@ -24,16 +24,10 @@ Route::get('/logout', function(){
     return redirect('/');
 });
 
+use App\Http\Controllers\RegisterController;
 
-/* REGISTER */
-Route::get('/register', function(){
-    return view('register');
-});
-
-Route::post('/register', function(){
-    // sementara langsung redirect ke login setelah daftar
-    return redirect('/');
-});
+Route::get('/register', [RegisterController::class, 'index']);
+Route::post('/register', [RegisterController::class, 'store']);
 
 
 /* DASHBOARD */
