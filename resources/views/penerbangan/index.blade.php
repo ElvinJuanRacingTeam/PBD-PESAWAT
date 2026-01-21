@@ -20,90 +20,93 @@ body{margin:0;font-family:'Poppins',sans-serif;background:#f4f6fb;}
     flex-direction:column;
     justify-content:space-between;
 }
-
 .logo-box{display:flex;align-items:center;gap:12px;margin-bottom:40px;}
 .logo{
-    width:52px;height:52px;
-    background:white;
-    border-radius:14px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:26px;
-    color:#4f46e5;
-    font-weight:bold;
+    width:52px;height:52px;background:white;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:26px;color:#4f46e5;font-weight:bold;
 }
 .brand{font-size:20px;font-weight:700;}
-
 .menu a{
-    display:block;
-    color:white;
-    text-decoration:none;
-    padding:12px;
-    border-radius:10px;
-    margin-bottom:8px;
+    display:block;color:white;text-decoration:none;
+    padding:12px;border-radius:10px;margin-bottom:8px;
 }
 .menu a.active{background:rgba(255,255,255,0.25);}
 .menu a:hover{background:rgba(255,255,255,0.2);}
 
 .profile-box{
-    background:rgba(255,255,255,0.12);border-radius:14px;padding:15px;
+    background:rgba(255,255,255,0.12);
+    border-radius:14px;padding:15px;
     display:flex;align-items:center;gap:10px;
 }
 .profile-circle{
-    width:40px;height:40px;border-radius:50%;background:#6366f1;
-    display:flex;align-items:center;justify-content:center;font-weight:700;
+    width:40px;height:40px;border-radius:50%;
+    background:#6366f1;display:flex;
+    align-items:center;justify-content:center;font-weight:700;
 }
 .logout{color:#ffb4b4;text-decoration:none;font-size:13px;margin-top:8px;display:inline-block;}
 
 .main{flex:1;padding:30px;}
 
-.section{
+.add-btn{
+    background:#4f46e5;color:white;
+    padding:8px 14px;border-radius:8px;
+    text-decoration:none;font-weight:600;
+}
+
+.flight-card{
     background:white;
-    border-radius:15px;
-    padding:25px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.06);
+    border-radius:14px;
+    padding:18px 22px;
+    margin-bottom:18px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.05);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-/* Tabel Responsif */
-.table-wrapper{width:100%;overflow-x:auto;}
-table{width:100%;border-collapse:collapse;table-layout:auto;min-width:700px;}
-th,td{padding:12px 10px;text-align:left;font-size:13px;word-wrap:break-word;word-break:break-word;}
-th{font-weight:700;border-bottom:2px solid #e5e7eb;}
-tr:nth-child(even){background:#f9fafb;}
-
-@media (max-width: 1200px) {
-    th, td { padding: 10px 8px; font-size: 12px; }
-}
-@media (max-width: 992px) {
-    .main { padding: 20px; }
-    th, td { padding: 8px 6px; font-size: 11px; }
-}
-@media (max-width: 768px) {
-    .wrapper { flex-direction: column; }
-    .sidebar { width: 100%; padding: 15px; flex-direction: row; justify-content: space-between; align-items: center; }
-    .menu { display: flex; gap: 5px; }
-    .menu a { padding: 8px 10px; margin-bottom: 0; font-size: 12px; }
-    .profile-box { display: none; }
-    .main { padding: 15px; }
+.flight-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
 
-.badge{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;}
+.airline-logo{
+    width:50px;height:50px;
+    border-radius:10px;
+    background:#f3f4f6;
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;
+}
+
+.flight-info small{color:#9ca3af;font-weight:600;}
+.flight-info h4{margin:2px 0;font-size:15px;}
+
+.flight-middle{
+    text-align:center;
+}
+.flight-middle h3{margin:0;font-size:18px;}
+.flight-middle small{color:#9ca3af;}
+
+.flight-right{
+    text-align:right;
+}
+.badge{
+    padding:4px 10px;border-radius:20px;
+    font-size:11px;font-weight:700;
+}
 .economy{background:#dbeafe;color:#1d4ed8;}
 .business{background:#fef3c7;color:#92400e;}
 .first{background:#fce7f3;color:#be185d;}
 
-.action a{margin-right:10px;text-decoration:none;font-weight:600;color:#4f46e5;}
+.action a{margin-left:12px;text-decoration:none;font-weight:600;color:#4f46e5;}
 .action button{border:none;background:none;color:red;font-weight:600;cursor:pointer;}
 
 .modal{
-    display:none;
-    position:fixed;
-    top:0;left:0;
+    display:none;position:fixed;top:0;left:0;
     width:100%;height:100%;
     background:rgba(0,0,0,0.5);
-    align-items:center;
-    justify-content:center;
+    align-items:center;justify-content:center;
 }
 .modal.show{display:flex;}
 
@@ -113,8 +116,8 @@ tr:nth-child(even){background:#f9fafb;}
     border-radius:12px;
     width:420px;
 }
-.modal-content input,
-.modal-content select{
+.modal-content select,
+.modal-content input{
     width:100%;
     padding:8px;
     margin-top:6px;
@@ -123,12 +126,9 @@ tr:nth-child(even){background:#f9fafb;}
     border-radius:6px;
 }
 .modal-content button{
-    background:#4f46e5;
-    color:white;
-    border:none;
-    padding:8px 14px;
-    border-radius:6px;
-    font-weight:600;
+    background:#4f46e5;color:white;
+    border:none;padding:8px 14px;
+    border-radius:6px;font-weight:600;
 }
 .close{float:right;font-size:22px;cursor:pointer;}
 </style>
@@ -144,7 +144,6 @@ tr:nth-child(even){background:#f9fafb;}
             <div class="logo">✈</div>
             <div class="brand">Ayo Terbang</div>
         </div>
-
         <div class="menu">
             <a href="/dashboard">Overview</a>
             <a href="/penumpang">Passenger Database</a>
@@ -153,11 +152,10 @@ tr:nth-child(even){background:#f9fafb;}
             <a href="/soal5">Analytics Report</a>
         </div>
     </div>
-
     <div>
         <div class="profile-box">
             <div class="profile-circle">AD</div>
-            <div class="profile-text">
+            <div>
                 <strong>Super Admin</strong><br>Management Level
             </div>
         </div>
@@ -170,65 +168,52 @@ tr:nth-child(even){background:#f9fafb;}
 
 <h2>Flight Schedule</h2><br>
 
-<a href="#" onclick="openAddModal();return false;"
-style="background:#4f46e5;color:white;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:600;">
-+ Add New Flight
-</a>
-
+<a href="#" class="add-btn" onclick="openAddModal();return false;">+ Add New Flight</a>
 <br><br>
 
-<div class="section">
-<div class="table-wrapper">
-<table>
-<tr>
-<th>Flight ID</th>
-<th>Route</th>
-<th>Departure</th>
-<th>Departure Time</th>
-<th>Arrival Time</th>
-<th>Gate</th>
-<th>Class</th>
-<th>Airline</th>
-<th>Aksi</th>
-</tr>
+@foreach($penerbangan as $p)
+<div class="flight-card">
 
-@foreach($penerbangan as $index => $p)
-<tr>
-<td>G{{ $index+1 }}</td>
-<td>{{ $p->kota_asal }} → {{ $p->kota_tujuan }}</td>
-<td>{{ $p->tgl_keberangkatan }}</td>
-<td>{{ $p->waktu_keberangkatan }}</td>
-<td>{{ $p->waktu_tiba }}</td>
-<td>{{ $p->gerbang }}</td>
-<td>
-@if($p->kelas=='Economy')
-<span class="badge economy">ECONOMY</span>
-@elseif($p->kelas=='Business')
-<span class="badge business">BUSINESS</span>
-@else
-<span class="badge first">FIRST</span>
-@endif
-</td>
-<td>{{ $p->maskapai }}</td>
-<td class="action">
-<a href="#" onclick="editFlight({{ $p->id_penerbangan }});return false;">Edit</a>
+    <div class="flight-left">
+        <div class="airline-logo">✈</div>
+        <div class="flight-info">
+            <small>{{ $p->maskapai }}</small>
+            <h4>{{ $p->kota_asal }} → {{ $p->kota_tujuan }}</h4>
+            <small>{{ $p->tgl_keberangkatan }}</small>
+        </div>
+    </div>
 
-<form action="/penerbangan/{{ $p->id_penerbangan }}" method="POST" style="display:inline;">
-@csrf
-@method('DELETE')
-<button type="submit">Hapus</button>
-</form>
-</td>
-</tr>
+    <div class="flight-middle">
+        <h3>{{ $p->waktu_keberangkatan }} → {{ $p->waktu_tiba }}</h3>
+        <small>Gate {{ $p->gerbang }}</small>
+    </div>
+
+    <div class="flight-right">
+        @if($p->kelas=='Economy')
+            <span class="badge economy">ECONOMY</span>
+        @elseif($p->kelas=='Business')
+            <span class="badge business">BUSINESS</span>
+        @else
+            <span class="badge first">FIRST</span>
+        @endif
+
+        <div class="action">
+            <a href="#" onclick="editFlight({{ $p->id_penerbangan }});return false;">Edit</a>
+            <form action="/penerbangan/{{ $p->id_penerbangan }}" method="POST" style="display:inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Hapus</button>
+            </form>
+        </div>
+    </div>
+
+</div>
 @endforeach
 
-</table>
-</div>
-</div>
 </div>
 </div>
 
-<!-- MODAL -->
+<!-- MODAL FORM -->
 <div class="modal" id="flightModal">
 <div class="modal-content">
 <span class="close" onclick="closeModal()">&times;</span>
@@ -238,20 +223,73 @@ style="background:#4f46e5;color:white;padding:8px 14px;border-radius:8px;text-de
 @csrf
 <input type="hidden" name="_method" id="formMethod">
 
-<input id="kota_asal" name="kota_asal" placeholder="Kota Asal" required>
-<input id="kota_tujuan" name="kota_tujuan" placeholder="Kota Tujuan" required>
-<input type="date" id="tgl_keberangkatan" name="tgl_keberangkatan" required>
-<input type="time" id="waktu_keberangkatan" name="waktu_keberangkatan" required>
-<input type="time" id="waktu_tiba" name="waktu_tiba" required>
-<input id="gerbang" name="gerbang" placeholder="Gate" required>
+<select name="kota_asal" id="kota_asal" required>
+<option value="">Pilih Kota Asal</option>
+<option>Bandung</option>
+<option>Jakarta</option>
+<option>Surabaya</option>
+<option>Denpasar</option>
+</select>
 
-<select id="kelas" name="kelas" required>
+<select name="kota_tujuan" id="kota_tujuan" required>
+<option value="">Pilih Kota Tujuan</option>
+<option>Medan</option>
+<option>Makassar</option>
+<option>Yogyakarta</option>
+<option>Balikpapan</option>
+</select>
+
+<input type="date" name="tgl_keberangkatan" id="tgl_keberangkatan" required>
+
+<select name="waktu_keberangkatan" id="waktu_keberangkatan" required>
+<option value="">Pilih Waktu Keberangkatan</option>
+<option>06:30</option>
+<option>08:45</option>
+<option>10:15</option>
+<option>13:00</option>
+<option>15:20</option>
+<option>18:10</option>
+<option>20:45</option>
+</select>
+
+<select name="waktu_tiba" id="waktu_tiba" required>
+<option value="">Pilih Waktu Tiba</option>
+<option>08:10</option>
+<option>10:20</option>
+<option>12:00</option>
+<option>14:40</option>
+<option>17:00</option>
+<option>19:50</option>
+<option>22:15</option>
+</select>
+
+<select name="gerbang" id="gerbang" required>
+<option value="">Pilih Gate</option>
+<option>A1</option>
+<option>A2</option>
+<option>B1</option>
+<option>B2</option>
+<option>C1</option>
+<option>C2</option>
+<option>D1</option>
+</select>
+
+<select name="kelas" id="kelas" required>
 <option>Economy</option>
 <option>Business</option>
 <option>First</option>
 </select>
 
-<input id="maskapai" name="maskapai" placeholder="Airline" required>
+<select name="maskapai" id="maskapai" required>
+<option value="">Pilih Airplane</option>
+<option>Garuda Indonesia</option>
+<option>Lion Air</option>
+<option>Batik Air</option>
+<option>Citilink</option>
+<option>AirAsia</option>
+<option>Sriwijaya Air</option>
+<option>Super Air Jet</option>
+</select>
 
 <button type="submit">Simpan</button>
 </form>
