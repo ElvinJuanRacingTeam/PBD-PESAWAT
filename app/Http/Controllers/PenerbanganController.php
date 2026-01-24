@@ -5,63 +5,78 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePenerbanganRequest;
 use App\Http\Requests\UpdatePenerbanganRequest;
 use App\Models\Penerbangan;
+use Illuminate\Http\Request;
 
 class PenerbanganController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $penerbangan = Penerbangan::orderBy('tgl_keberangkatan', 'desc')->get();
         return view('penerbangan.index', compact('penerbangan'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(){}
+
+    /* fallback store */
+    private function forceStore(Request $request)
     {
-        //
+        Penerbangan::create([
+            'kota_asal' => $request->kota_asal,
+            'kota_tujuan' => $request->kota_tujuan,
+            'tgl_keberangkatan' => $request->tgl_keberangkatan,
+            'waktu_keberangkatan' => $request->waktu_keberangkatan,
+            'waktu_tiba' => $request->waktu_tiba,
+            'gerbang' => $request->gerbang,
+            'kelas' => $request->kelas,
+            'maskapai' => $request->maskapai,
+            'harga_economy' => $request->harga_economy,
+            'harga_business' => $request->harga_business,
+            'harga_first' => $request->harga_first
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StorePenerbanganRequest $request)
     {
-        Penerbangan::create($request->validated());
+        $data = $request->validated();
+
+        if(count($data) > 0){
+            Penerbangan::create($data);
+        } else {
+            $this->forceStore($request);
+        }
+
         return redirect('/penerbangan')->with('success', 'Flight added successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Penerbangan $penerbangan)
-    {
-        //
-    }
+    public function show(Penerbangan $penerbangan){}
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Penerbangan $penerbangan)
-    {
-        //
-    }
+    public function edit(Penerbangan $penerbangan){}
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdatePenerbanganRequest $request, Penerbangan $penerbangan)
     {
-        $penerbangan->update($request->validated());
+        $data = $request->validated();
+
+        if(count($data) > 0){
+            $penerbangan->update($data);
+        } else {
+            $penerbangan->update([
+                'kota_asal' => $request->kota_asal,
+                'kota_tujuan' => $request->kota_tujuan,
+                'tgl_keberangkatan' => $request->tgl_keberangkatan,
+                'waktu_keberangkatan' => $request->waktu_keberangkatan,
+                'waktu_tiba' => $request->waktu_tiba,
+                'gerbang' => $request->gerbang,
+                'kelas' => $request->kelas,
+                'maskapai' => $request->maskapai,
+                'harga_economy' => $request->harga_economy,
+                'harga_business' => $request->harga_business,
+                'harga_first' => $request->harga_first
+            ]);
+        }
+
         return redirect('/penerbangan')->with('success', 'Flight updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Penerbangan $penerbangan)
     {
         $penerbangan->delete();

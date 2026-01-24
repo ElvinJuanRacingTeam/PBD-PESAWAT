@@ -167,8 +167,9 @@ tr:nth-child(even){background:#f9fafb;}
 
     <!-- PREMIUM SALES -->
     <div class="section">
-        <h3>Premium Sales Analysis</h3>
-        <p>Pemesanan di atas Rp 1.000.000 diurutkan dari harga tertinggi</p>
+        <h3>Revenue Ranking</h3>
+        <p>Daftar seluruh pemesanan diurutkan berdasarkan nilai transaksi tertinggi</p>
+
         
         <!-- Search Box -->
         <div class="search-box">

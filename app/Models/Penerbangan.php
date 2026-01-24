@@ -12,6 +12,7 @@ class Penerbangan extends Model
 
     protected $table = 'penerbangan';
     protected $primaryKey = 'id_penerbangan';
+    public $timestamps = true;
 
     protected $fillable = [
         'kota_asal',
@@ -22,10 +23,20 @@ class Penerbangan extends Model
         'gerbang',
         'kelas',
         'maskapai',
+        'harga_economy',
+        'harga_business',
+        'harga_first'
+    ];
+
+    protected $casts = [
+        'harga_economy'  => 'integer',
+        'harga_business' => 'integer',
+        'harga_first'    => 'integer',
+        'tgl_keberangkatan' => 'date'
     ];
 
     public function pemesanan()
     {
-        return $this->hasMany(Pemesanan::class, 'id_penerbangan');
+        return $this->hasMany(Pemesanan::class, 'id_penerbangan', 'id_penerbangan');
     }
 }

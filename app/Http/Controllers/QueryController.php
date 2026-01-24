@@ -42,19 +42,16 @@ class QueryController extends Controller
         ));
     }
 
+    /* PREMIUM SALES ANALYSIS (SEMUA PEMESANAN) */
     public function soal1()
     {
-        return Pemesanan::join('penumpang','pemesanan.id_penumpang','=','penumpang.id_penumpang')
-        ->join('penerbangan','pemesanan.id_penerbangan','=','penerbangan.id_penerbangan')
-        ->where('pemesanan.total_harga','>',1000000)
-        ->orderBy('pemesanan.total_harga','desc')
-        ->get([
-            'penumpang.nama',
-            'penerbangan.kota_asal',
-            'penerbangan.kota_tujuan',
-            'penerbangan.kelas',
-            'pemesanan.total_harga'
-        ]);
+        $data = DB::table('pemesanan')
+            ->join('penumpang','pemesanan.id_penumpang','=','penumpang.id_penumpang')
+            ->join('penerbangan','pemesanan.id_penerbangan','=','penerbangan.id_penerbangan')
+            ->orderBy('pemesanan.total_harga','desc')
+            ->get();
+
+        return view('query.soal1', compact('data'));
     }
 
     public function soal2(){ return response()->json([]); }
@@ -75,14 +72,13 @@ class QueryController extends Controller
                 'pemesanan.nomor_kursi as seat',
                 'penerbangan.gerbang as gate'
             )
-            ->where('pemesanan.total_harga','>',1000000)
             ->orderBy('pemesanan.total_harga','desc')
             ->get();
 
         return view('laporan.index', compact('data'));
     }
 
-    /* EXPORT CLIENT-SPECIFIC PDF */
+    /* EXPORT CLIENT PDF (SEMUA PEMESANAN CLIENT) */
     public function exportClientPDF()
     {
         $clientName = request()->query('client');
@@ -91,7 +87,6 @@ class QueryController extends Controller
             return redirect()->back()->with('error', 'Client name is required');
         }
 
-        // Fetch data for specific client only
         $data = DB::table('pemesanan')
             ->join('penumpang','pemesanan.id_penumpang','=','penumpang.id_penumpang')
             ->join('penerbangan','pemesanan.id_penerbangan','=','penerbangan.id_penerbangan')
@@ -103,19 +98,16 @@ class QueryController extends Controller
                 'pemesanan.nomor_kursi as seat',
                 'penerbangan.gerbang as gate'
             )
-            ->where('pemesanan.total_harga','>',1000000)
             ->where('penumpang.nama', $clientName)
             ->orderBy('pemesanan.total_harga','desc')
             ->get();
 
-        // Calculate totals
         $totalBookings = $data->count();
         $totalRevenue = $data->sum('harga');
 
         $pdf = Pdf::loadView('laporan.pdf', compact('data', 'clientName', 'totalBookings', 'totalRevenue'));
         
-        // Clean filename
-        $filename = str_replace(' ', '_', $clientName) . '_Premium_Sales.pdf';
+        $filename = str_replace(' ', '_', $clientName) . '_Sales_Report.pdf';
         
         return $pdf->download($filename);
     }

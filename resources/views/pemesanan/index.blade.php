@@ -37,81 +37,124 @@ body{margin:0;font-family:'Poppins',sans-serif;background:#f4f6fb;}
 .menu a:hover{background:rgba(255,255,255,0.2);}
 
 .profile-box{
-    background:rgba(255,255,255,0.12);border-radius:14px;padding:15px;
-    display:flex;align-items:center;gap:10px;
+    background:rgba(255,255,255,0.12);
+    border-radius:14px;
+    padding:15px;
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 .profile-circle{
-    width:40px;height:40px;border-radius:50%;background:#6366f1;
-    display:flex;align-items:center;justify-content:center;font-weight:700;
+    width:40px;height:40px;border-radius:50%;
+    background:#6366f1;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;
 }
 .logout{color:#ffb4b4;text-decoration:none;font-size:13px;margin-top:8px;display:inline-block;}
-
 
 .main{flex:1;padding:30px;overflow-y:auto;}
 h2{margin:0;font-size:26px;font-weight:700;}
 
 .section{
     margin-top:20px;
-    background:white;border-radius:15px;padding:25px;
+    background:white;
+    border-radius:15px;
+    padding:25px;
     box-shadow:0 4px 12px rgba(0,0,0,0.06);
 }
 
-/* Tabel Responsif */
 .table-wrapper{width:100%;overflow-x:auto;}
-table{width:100%;border-collapse:collapse;table-layout:auto;min-width:600px;}
-th,td{padding:12px 10px;text-align:left;font-size:13px;word-wrap:break-word;word-break:break-word;}
+table{width:100%;border-collapse:collapse;min-width:600px;}
+th,td{padding:12px 10px;text-align:left;font-size:13px;}
 th{font-weight:700;border-bottom:2px solid #e5e7eb;}
 tr:nth-child(even){background:#f9fafb;}
-
-@media (max-width: 1200px) {
-    th, td { padding: 10px 8px; font-size: 12px; }
-}
-@media (max-width: 992px) {
-    .main { padding: 20px; }
-    th, td { padding: 8px 6px; font-size: 11px; }
-}
-@media (max-width: 768px) {
-    .wrapper { flex-direction: column; }
-    .sidebar { width: 100%; padding: 15px; flex-direction: row; justify-content: space-between; align-items: center; }
-    .menu { display: flex; gap: 5px; }
-    .menu a { padding: 8px 10px; margin-bottom: 0; font-size: 12px; }
-    .profile-box { display: none; }
-    .main { padding: 15px; }
-}
-
-.action a{
-    margin-right:12px;
-    text-decoration:none;
-    font-weight:600;
-    color:#4f46e5;
-}
 .action button{
-    border:none;
-    background:none;
-    color:#ef4444;
-    font-weight:600;
-    cursor:pointer;
+    border:none;background:none;color:#ef4444;font-weight:600;cursor:pointer;
 }
 
+/* ===== MODAL MODERN SCROLL ===== */
 .modal{
-    display:none;position:fixed;top:0;left:0;width:100%;height:100%;
-    background:rgba(0,0,0,0.5);align-items:center;justify-content:center;z-index:1000;
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,0.55);
+    align-items:center;
+    justify-content:center;
+    z-index:1000;
 }
 .modal.show{display:flex;}
+
 .modal-content{
-    background:white;border-radius:20px;padding:30px;width:90%;max-width:600px;
+    background:white;
+    border-radius:18px;
+    padding:26px 28px;
+    width:680px;
+    max-width:90vw;
+    max-height:90vh;
+    overflow-y:auto;
+    box-shadow:0 20px 40px rgba(0,0,0,0.25);
 }
-.close{font-size:28px;cursor:pointer;color:#9ca3af;}
-.form-group{margin-bottom:18px;}
+
+.close{
+    font-size:26px;
+    cursor:pointer;
+    color:#9ca3af;
+    float:right;
+}
+
+.form-group{margin-bottom:16px;}
 .form-group label{display:block;margin-bottom:6px;font-weight:600;}
 .form-group input,.form-group select{
-    width:100%;padding:10px;border:2px solid #e5e7eb;border-radius:8px;
+    width:100%;
+    padding:10px;
+    border:2px solid #e5e7eb;
+    border-radius:8px;
+    font-family:'Poppins',sans-serif;
 }
+
 .form-actions{text-align:right;}
 .form-actions button{
-    background:#4f46e5;color:white;border:none;
-    padding:8px 14px;border-radius:6px;font-weight:600;
+    background:#4f46e5;
+    color:white;
+    border:none;
+    padding:10px 16px;
+    border-radius:8px;
+    font-weight:600;
 }
+
+/* ===== SEAT GRID ===== */
+.seat-grid{
+    display:grid;
+    grid-template-columns:repeat(8,1fr);
+    gap:8px;
+    margin-top:10px;
+    max-width:360px;
+}
+.seat{
+    background:#1f2937;
+    color:white;
+    padding:8px 0;
+    border-radius:6px;
+    font-size:11px;
+    font-weight:600;
+    text-align:center;
+    cursor:pointer;
+}
+.seat:hover{background:#374151;}
+.seat.taken{background:#dc2626;cursor:not-allowed;}
+.seat.selected{background:#16a34a;}
+
+.seat-info{
+    margin-top:8px;
+    font-size:11px;
+    color:#64748b;
+}
+.seat-info span{
+    display:inline-block;width:14px;height:14px;border-radius:3px;margin-right:4px;
+}
+.seat-available{background:#1f2937;}
+.seat-taken{background:#dc2626;}
+.seat-selected{background:#16a34a;}
 </style>
 </head>
 <body>
@@ -120,73 +163,63 @@ tr:nth-child(even){background:#f9fafb;}
 
 <!-- SIDEBAR -->
 <div class="sidebar">
-    <div>
-        <div class="logo-box">
-            <div class="logo">✈</div>
-            <div class="brand">Ayo Terbang</div>
-        </div>
-
-        <div class="menu">
-            <a href="/dashboard">Overview</a>
-            <a href="/penumpang">Passenger Database</a>
-            <a href="/penerbangan">Flight Schedule</a>
-            <a href="/pemesanan" class="active">Ticket Bookings</a>
-            <a href="/soal5">Analytics Report</a>
-        </div>
-    </div>
-
-    <!-- ADMIN BOX + LOGOUT -->
-    <div>
-        <div class="profile-box">
-            <div class="profile-circle">AD</div>
-            <div class="profile-text">
-                <strong>Super Admin</strong><br>Management Level
-            </div>
-        </div>
-        <a href="/logout" class="logout">Sign Out System</a>
-    </div>
+<div>
+<div class="logo-box">
+<div class="logo">✈</div>
+<div class="brand">Ayo Terbang</div>
+</div>
+<div class="menu">
+<a href="/dashboard">Overview</a>
+<a href="/penumpang">Passenger Database</a>
+<a href="/penerbangan">Flight Schedule</a>
+<a href="/pemesanan" class="active">Ticket Bookings</a>
+<a href="/soal5">Analytics Report</a>
+</div>
+</div>
+<div>
+<div class="profile-box">
+<div class="profile-circle">AD</div>
+<div><strong>Super Admin</strong><br>Management Level</div>
+</div>
+<a href="/logout" class="logout">Sign Out System</a>
+</div>
 </div>
 
 <!-- MAIN -->
 <div class="main">
 
-<h2>Ticket Bookings</h2>
-<br>
+<h2>Ticket Bookings</h2><br>
 
-<a href="#" onclick="openModal('add');return false;"
+<a href="#" onclick="openModal();return false;"
 style="background:#4f46e5;color:white;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:600;">
-+ New Booking
-</a>
++ New Booking</a>
 
 <div class="section">
 <div class="table-wrapper">
 <table>
 <tr>
-<th>ID Pemesanan</th>
-<th>ID Penumpang</th>
-<th>ID Penerbangan</th>
-<th>Nomor Kursi</th>
+<th>ID</th>
+<th>Passenger</th>
+<th>Flight</th>
+<th>Seat</th>
 <th>Total Harga</th>
-<th>Tgl Pemesanan</th>
-<th>Metode Pembayaran</th>
+<th>Tanggal</th>
+<th>Metode</th>
 <th>Aksi</th>
 </tr>
 
-@foreach($pemesanan as $index => $p)
+@foreach($pemesanan as $i => $p)
 <tr>
-<td>S{{ $index + 1 }}</td>
-<td>P{{ $p->id_penumpang }}</td>
-<td>G{{ $p->id_penerbangan }}</td>
+<td>S{{ $i+1 }}</td>
+<td>{{ $p->penumpang->nama }}</td>
+<td>{{ $p->penerbangan->kota_asal }} → {{ $p->penerbangan->kota_tujuan }}</td>
 <td>{{ $p->nomor_kursi }}</td>
-<td>{{ number_format($p->total_harga,0,',','') }}</td>
+<td>Rp {{ number_format($p->total_harga,0,',','.') }}</td>
 <td>{{ $p->tgl_pemesanan }}</td>
 <td>{{ $p->metode_pembayaran }}</td>
 <td class="action">
-<a href="#" onclick="editBooking({{ $p->id_pemesanan }});return false;">Edit</a>
-
-<form method="POST" action="/pemesanan/{{ $p->id_pemesanan }}" style="display:inline;">
-@csrf
-@method('DELETE')
+<form method="POST" action="/pemesanan/{{ $p->id_pemesanan }}">
+@csrf @method('DELETE')
 <button type="submit">Hapus</button>
 </form>
 </td>
@@ -195,22 +228,22 @@ style="background:#4f46e5;color:white;padding:8px 14px;border-radius:8px;text-de
 </table>
 </div>
 </div>
+
 </div>
 </div>
 
 <!-- MODAL -->
 <div class="modal" id="bookingModal">
 <div class="modal-content">
-<span class="close" onclick="closeModal()">&times;</span>
-<h3 id="modalTitle">New Booking</h3><br>
+<span class="close" onclick="closeModal()">×</span>
+<h3>New Booking</h3><br>
 
-<form id="bookingForm" method="POST">
+<form method="POST" action="/pemesanan">
 @csrf
-<input type="hidden" name="_method" id="formMethod">
 
 <div class="form-group">
 <label>Passenger</label>
-<select name="id_penumpang" id="id_penumpang" required>
+<select name="id_penumpang" required>
 @foreach($penumpang as $ps)
 <option value="{{ $ps->id_penumpang }}">{{ $ps->nama }}</option>
 @endforeach
@@ -219,9 +252,12 @@ style="background:#4f46e5;color:white;padding:8px 14px;border-radius:8px;text-de
 
 <div class="form-group">
 <label>Flight</label>
-<select name="id_penerbangan" id="id_penerbangan" required>
+<select id="flightSelect" name="id_penerbangan" required>
 @foreach($penerbangan as $f)
-<option value="{{ $f->id_penerbangan }}">
+<option value="{{ $f->id_penerbangan }}"
+data-economy="{{ $f->harga_economy }}"
+data-business="{{ $f->harga_business }}"
+data-first="{{ $f->harga_first }}">
 {{ $f->kota_asal }} → {{ $f->kota_tujuan }}
 </option>
 @endforeach
@@ -229,69 +265,98 @@ style="background:#4f46e5;color:white;padding:8px 14px;border-radius:8px;text-de
 </div>
 
 <div class="form-group">
+<label>Kelas</label>
+<select id="classSelect" required>
+<option value="economy">Economy</option>
+<option value="business">Business</option>
+<option value="first">First</option>
+</select>
+</div>
+
+<div class="form-group">
 <label>Seat</label>
-<input type="text" name="nomor_kursi" id="nomor_kursi" required>
+<input type="hidden" name="nomor_kursi" id="seatInput" required>
+<div class="seat-grid" id="seatGrid"></div>
+<div class="seat-info">
+<span class="seat-available"></span> Available
+<span class="seat-taken"></span> Taken
+<span class="seat-selected"></span> Selected
+</div>
 </div>
 
 <div class="form-group">
 <label>Total Harga</label>
-<input type="number" name="total_harga" id="total_harga" required>
+<input type="number" name="total_harga" id="priceInput" readonly required>
 </div>
 
 <div class="form-group">
 <label>Tanggal Pemesanan</label>
-<input type="date" name="tgl_pemesanan" id="tgl_pemesanan" required>
+<input type="date" name="tgl_pemesanan" required>
 </div>
 
 <div class="form-group">
 <label>Metode Pembayaran</label>
-<select name="metode_pembayaran" id="metode_pembayaran" required>
-<option value="Credit Card">Credit Card</option>
-<option value="Transfer">Transfer</option>
-<option value="Cash">Cash</option>
+<select name="metode_pembayaran" required>
+<option>Credit Card</option>
+<option>Transfer</option>
+<option>Cash</option>
 </select>
 </div>
 
 <div class="form-actions">
 <button type="submit">Simpan</button>
 </div>
+
 </form>
 </div>
 </div>
 
 <script>
-const bookingData = @json($pemesanan);
-
-function openModal(mode){
- document.getElementById('bookingModal').classList.add('show');
- if(mode === 'add'){
-   document.getElementById('modalTitle').innerText = 'New Booking';
-   document.getElementById('bookingForm').action = '/pemesanan';
-   document.getElementById('formMethod').value = 'POST';
-   document.getElementById('bookingForm').reset();
- }
+function openModal(){
+document.getElementById('bookingModal').classList.add('show');
 }
-
-function editBooking(id){
- const b = bookingData.find(x => x.id_pemesanan == id);
- if(!b) return;
-
- document.getElementById('bookingModal').classList.add('show');
- document.getElementById('modalTitle').innerText = 'Edit Booking';
- document.getElementById('bookingForm').action = '/pemesanan/' + id;
- document.getElementById('formMethod').value = 'PUT';
-
- document.getElementById('id_penumpang').value = b.id_penumpang;
- document.getElementById('id_penerbangan').value = b.id_penerbangan;
- document.getElementById('nomor_kursi').value = b.nomor_kursi;
- document.getElementById('total_harga').value = b.total_harga;
- document.getElementById('tgl_pemesanan').value = b.tgl_pemesanan;
- document.getElementById('metode_pembayaran').value = b.metode_pembayaran;
-}
-
 function closeModal(){
- document.getElementById('bookingModal').classList.remove('show');
+document.getElementById('bookingModal').classList.remove('show');
 }
+</script>
+
+<script>
+const seatGrid=document.getElementById('seatGrid');
+const seatInput=document.getElementById('seatInput');
+
+['A','B','C','D','E'].forEach(r=>{
+ for(let i=1;i<=8;i++){
+   let code=r+i;
+   let div=document.createElement('div');
+   div.className='seat';
+   div.innerText=code;
+   div.onclick=()=>{
+     document.querySelectorAll('.seat.selected').forEach(s=>s.classList.remove('selected'));
+     div.classList.add('selected');
+     seatInput.value=code;
+   };
+   seatGrid.appendChild(div);
+ }
+});
+</script>
+
+<script>
+const flightSelect=document.getElementById('flightSelect');
+const classSelect=document.getElementById('classSelect');
+const priceInput=document.getElementById('priceInput');
+
+function updatePrice(){
+let opt=flightSelect.options[flightSelect.selectedIndex];
+let cls=classSelect.value;
+let price=0;
+if(cls==='economy') price=opt.dataset.economy;
+if(cls==='business') price=opt.dataset.business;
+if(cls==='first') price=opt.dataset.first;
+priceInput.value=price;
+}
+flightSelect.addEventListener('change',updatePrice);
+classSelect.addEventListener('change',updatePrice);
+updatePrice();
 </script>
 
 </body>

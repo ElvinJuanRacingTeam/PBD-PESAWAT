@@ -8,6 +8,7 @@ use App\Http\Controllers\PenerbanganController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RegisterController;
 
 /* LOGIN */
 Route::get('/', function () {
@@ -24,11 +25,9 @@ Route::get('/logout', function(){
     return redirect('/');
 });
 
-use App\Http\Controllers\RegisterController;
-
+/* REGISTER */
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
-
 
 /* DASHBOARD */
 Route::get('/dashboard', [DashboardController::class, 'index']);
@@ -38,7 +37,7 @@ Route::resource('penumpang', PenumpangController::class);
 Route::resource('penerbangan', PenerbanganController::class);
 Route::resource('pemesanan', PemesananController::class);
 
-/* ANALYTICS REPORT */
+/* ANALYTICS */
 Route::get('/soal1', [QueryController::class, 'soal1']);
 Route::get('/soal2', [QueryController::class, 'soal2']);
 Route::get('/soal3', [QueryController::class, 'soal3']);

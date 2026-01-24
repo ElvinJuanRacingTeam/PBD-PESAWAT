@@ -22,14 +22,18 @@ class StorePenerbanganRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kota_asal' => 'required|string',
-            'kota_tujuan' => 'required|string',
+            'kota_asal' => 'required',
+            'kota_tujuan' => 'required',
             'tgl_keberangkatan' => 'required|date',
             'waktu_keberangkatan' => 'required',
             'waktu_tiba' => 'required',
-            'gerbang' => 'required|string',
-            'kelas' => 'required|in:Economy,Business,First Class',
-            'maskapai' => 'required|string',
+            'gerbang' => 'required',
+            'kelas' => 'required',
+            'maskapai' => 'required',
+
+            'harga_economy' => 'required|integer',
+            'harga_business' => 'required|integer',
+            'harga_first' => 'required|integer',
         ];
     }
 }
